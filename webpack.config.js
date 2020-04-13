@@ -103,11 +103,60 @@ module.exports = (env, opt) => {
             {
               loader: 'ts-loader',
             },
+          ].concat(
+            isProd
+              ? [
+                  {
+                    loader: 'eslint-loader',
+                  },
+                ]
+              : [],
+          ),
+        },
+        {
+          /* Config for global styles */
+
+          test: /\.(sa|sc|c)ss$/,
+          use: [
+            MiniCssExtractPlugin.loader,
+            {
+              loader: 'css-loader',
+              options: {
+                sourceMap: true,
+              },
+            },
+            'postcss-loader',
+            'sass-loader',
+          ],
+          include: [
+            // stylesheets in node_modules and src/styles/global
+            path.resolve('./node_modules'),
+            path.resolve('./src/main/global.scss'),
           ],
         },
         {
+          /* Config for local styles */
+
           test: /\.(sa|sc|c)ss$/,
-          use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader'],
+          use: [
+            MiniCssExtractPlugin.loader,
+            {
+              loader: 'css-loader',
+              options: {
+                modules: {
+                  localIdentName: isDev ? '[path][name]__[local]' : '[hash:base64]',
+                },
+                sourceMap: false,
+              },
+            },
+            'postcss-loader',
+            'sass-loader',
+          ],
+          include: [
+            // stylesheets in node_modules and src/styles/global
+            path.resolve('./src'),
+          ],
+          exclude: [path.resolve('./node_modules'), path.resolve('./src/main/global.scss')],
         },
         {
           test: /\.(png|jpe?g|gif|ico)$/i,
