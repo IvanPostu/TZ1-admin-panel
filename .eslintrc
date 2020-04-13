@@ -1,0 +1,28 @@
+{
+  "parser": "@typescript-eslint/parser",
+
+  "plugins": ["@typescript-eslint"],
+  "extends": [
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier/@typescript-eslint",
+    "plugin:prettier/recommended"
+  ],
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "rules": {
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/no-namespace": "off",
+    "react/prop-types": "off",
+    "no-console": "warn",
+    "@typescript-eslint/no-unused-vars": "warn",
+    "@typescript-eslint/interface-name-prefix": "off"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
+}

@@ -1,18 +1,18 @@
-import React from "react";
+import React from 'react'
 
 function sleep1000(s: string) {
   return new Promise<string>((resolve, reject) => {
     setTimeout(() => {
-      resolve("hello " + s);
-    }, 1000);
-  });
+      resolve('hello ' + s)
+    }, 1000)
+  })
 }
 
 async function q() {
-  const response = await sleep1000("q");
-  console.log(response);
-  const r2 = await sleep1000(response);
-  console.log(r2);
+  const response = await sleep1000('q')
+  console.log(response)
+  const r2 = await sleep1000(response)
+  console.log(r2)
 }
 
 export const App: React.FC = () => {
@@ -24,9 +24,8 @@ export const App: React.FC = () => {
             <div className="card-content white-text">
               <span className="card-title">Card Title</span>
               <p>
-                I am a very simple card. I am good at containing small bits of
-                information. I am convenient because I require little markup to
-                use effectively.
+                I am a very simple card. I am good at containing small bits of information. I am
+                convenient because I require little markup to use effectively.
               </p>
             </div>
             <div className="card-action">
@@ -38,5 +37,5 @@ export const App: React.FC = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
