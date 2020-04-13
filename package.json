@@ -6,7 +6,9 @@
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server",
-    "build": "cross-env NODE_ENV=production webpack "
+    "build": "cross-env NODE_ENV=production webpack ",
+    "test": "jest",
+    "lint": "node_modules/.bin/eslint '*/**/*.{js,ts,tsx}' --quiet --fix"
   },
   "keywords": [
     "react",
@@ -20,6 +22,7 @@
   "devDependencies": {
     "@types/react": "^16.9.34",
     "@types/react-dom": "^16.9.6",
+    "@types/react-router-dom": "^5.1.4",
     "@typescript-eslint/eslint-plugin": "^2.27.0",
     "@typescript-eslint/parser": "^2.27.0",
     "autoprefixer": "^9.7.6",
@@ -51,6 +54,7 @@
   "dependencies": {
     "materialize-css": "^1.0.0-rc.2",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "react-router-dom": "^5.1.2"
   }
 }
