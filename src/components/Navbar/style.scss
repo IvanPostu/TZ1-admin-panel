@@ -1,3 +1,32 @@
-#navbarHeader {
-  color: rgb(255, 208, 0);
+$navbarHeight: 44px;
+
+#navbarId {
+  background-color: rgb(33, 134, 180);
+  height: $navbarHeight;
+
+  #navbarLogo {
+    font-size: 1.4rem;
+  }
+
+  ul {
+    li {
+      display: inline;
+    }
+    .linkBtn {
+      height: $navbarHeight;
+      color: white;
+      background: transparent;
+      font-size: 1.1rem;
+      text-decoration: none;
+      padding: 0 6px 0 6px;
+      display: inline-flex;
+      align-items: center;
+    }
+    .linkBtn:hover {
+      background: rgba(0, 0, 0, 0.155);
+    }
+    .linkBtn:active {
+      background: rgba(0, 0, 0, 0.195);
+    }
+  }
 }

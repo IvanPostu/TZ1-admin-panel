@@ -2,6 +2,34 @@ body {
   background: rgb(247, 247, 247);
 }
 
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
+
 .px-1 {
   padding: 0 1rem 0 1rem;
 }
@@ -24,4 +52,12 @@ body {
 
 .mt-1 {
   margin-top: 1rem;
+}
+
+.f-left {
+  float: left;
+}
+
+.f-right {
+  float: right;
 }

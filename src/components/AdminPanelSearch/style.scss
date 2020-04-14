@@ -1,0 +1,17 @@
+@import '@/mixins/defaultMediaQueries.scss';
+
+.q1 {
+  background: green;
+
+  width: 568px;
+  height: 20px;
+  @include mq(sm) {
+    background: red;
+  }
+}
+
+.q2 {
+  background: green;
+  width: 35.5em;
+  height: 20px;
+}
