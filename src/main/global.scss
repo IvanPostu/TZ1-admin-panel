@@ -1,3 +1,5 @@
+@import '@/mixins/defaultMediaQueries.scss';
+
 body {
   background: rgb(247, 247, 247);
 }
@@ -23,25 +25,15 @@ button {
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
+
+  @include mql(sm) {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
 }
 
-@media (min-width: 768px) {
-  .container {
-    width: 750px;
-  }
-}
 
-@media (min-width: 992px) {
-  .container {
-    width: 970px;
-  }
-}
-
-@media (min-width: 1200px) {
-  .container {
-    width: 1170px;
-  }
-}
 
 .px-1 {
   padding: 0 1rem 0 1rem;
