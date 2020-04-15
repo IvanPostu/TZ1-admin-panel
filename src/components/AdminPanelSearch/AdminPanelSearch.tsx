@@ -1,5 +1,5 @@
 import React, { Component, Fragment, PropsWithChildren, createRef } from 'react'
-import style from './style.scss'
+// import style from './style.scss'
 
 export class AdminPanelSearch extends Component<PropsWithChildren<{}>> {
   /**
@@ -10,9 +10,7 @@ export class AdminPanelSearch extends Component<PropsWithChildren<{}>> {
   render() {
     return (
       <Fragment>
-        <div className={style.q1}></div>
-        <div className={style.q2}></div>
-        <div>Search panel</div>
+        <h1>Search panel</h1>
       </Fragment>
     )
   }

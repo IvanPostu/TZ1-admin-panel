@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path')
+const ip = require('ip')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
@@ -73,8 +74,7 @@ module.exports = (env, opt) => {
     devServer: isDev
       ? {
           contentBase: path.resolve(__dirname, 'build', 'devserver'),
-          useLocalIp: useLocalNetwork,
-          host: '127.0.0.1',
+          host: useLocalNetwork ? ip.address() : '127.0.0.1',
           port: 8000,
           hot: true,
           historyApiFallback: true,
@@ -159,8 +159,7 @@ module.exports = (env, opt) => {
           exclude: [path.resolve('./node_modules'), path.resolve('./src/main/global.scss')],
         },
         {
-          test: /\.(png|jpe?g|gif|ico)$/i,
-          exclude: /node_modules/,
+          test: /\.(svg|png|jpe?g|gif|ico)$/i,
           loader: 'file-loader',
           options: {
             outputPath: 'images',
