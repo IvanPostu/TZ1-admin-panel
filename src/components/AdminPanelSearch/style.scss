@@ -1,17 +1,106 @@
 @import '@/mixins/defaultMediaQueries.scss';
+@import '@/mixins/deviceSizes.scss';
+@import '@/mixins/colors.scss';
+@import '@/mixins/boxShadows.scss';
 
-.q1 {
-  background: green;
+$searchInputHeight: 35px;
 
-  width: 568px;
-  height: 20px;
-  @include mq(sm) {
-    background: red;
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  border: 1px solid orange;
+  flex-direction: row;
+
+  @include mql(sm) {
+    flex-direction: column;
   }
-}
 
-.q2 {
-  background: green;
-  width: 35.5em;
-  height: 20px;
+  .item {
+    flex: 1 1 calc(33.33% - 20px);
+    margin: .3rem 3px .3rem 3px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .box {
+    background: white;
+    max-width: 100%;
+    border-radius: 12px;
+    display: flex;
+    flex: auto;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 1.5rem 0 1.5rem 0;
+    overflow: hidden;
+    box-shadow: $boxShadowA;
+
+    @include mql(sm) {
+      width: 100%;
+    }
+
+    p {
+      text-transform: uppercase;
+      font-size: 12px;
+      font-weight: 700;
+      margin: 0 4px 10px 4px;
+    }
+
+    .panelIcon {
+      font-size: 80px;
+      height: 80px;
+      display: flex;
+      line-height: 80px;
+      text-align: center;
+    }
+
+    .tbox {
+      max-width: 100%;
+      height: $searchInputHeight;
+      line-height: 40px;
+      font-size: 20px;
+      background: #ecf0f1;
+      border-radius: 40px;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+
+      input[type="text"] {
+        border: none;
+        margin: 0 2px 0 6px;
+        background: none;
+        color: #34495e;
+        outline: none;
+        padding: 10px 0;
+        // border: 1px solid yellow;
+        font-size: 1.1rem;
+      }
+
+      button {
+        padding: 0 3px 0 4px;
+        width: $searchInputHeight;
+        height: $searchInputHeight;
+        $brRadius: 20px;
+        border-top-right-radius: $brRadius;
+        border-bottom-right-radius: $brRadius;
+        background: $blueA;
+
+        .searchIcon {
+          font-size: $searchInputHeight - 5px;
+
+          color: white;
+        }
+      }
+
+      button:hover {
+        background: $blueC;
+        cursor: pointer;
+      }
+
+    }
+
+  }
 }

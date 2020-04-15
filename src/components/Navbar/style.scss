@@ -1,9 +1,10 @@
+@import '@/mixins/colors.scss';
 @import '@/mixins/defaultMediaQueries.scss';
 
 $navbarHeight: 44px;
 
 #navbarId {
-  background-color: rgb(33, 134, 180);
+  background-color: $blueA;
   height: $navbarHeight;
 
   #navbarLogo {
