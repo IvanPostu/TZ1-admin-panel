@@ -23,8 +23,8 @@ export const CategoriesInput: FC = () => {
             }}
           >
             <div className={style.searchParametersMenu}>
-              <div onClick={() => setCategoriesIsShowed(true)}>
-                <button>
+              <div>
+                <button onClick={() => setCategoriesIsShowed(categoriesIsShowed ? false : true)}>
                   Меню
                   <span className="mt-1">
                     <IoIosArrowDown />

@@ -1,0 +1,26 @@
+@import '@/styles/boxShadows.scss';
+@import '@/styles/colors.scss';
+
+#footer {
+  width: 100%;
+  min-height: 70px;
+  box-shadow: $boxShadowA;
+  margin-top: 20px;
+  // background: rgb(49, 59, 85);
+  background: $grayA;
+
+  display: flex;
+  align-items: flex-end;
+  // position: absolute;
+
+  .tail {
+    width: 100%;
+    background: rgb(35, 40, 60);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+    font-size: 1.0rem;
+    text-align: center;
+    padding: 6px;
+  }
+
+}

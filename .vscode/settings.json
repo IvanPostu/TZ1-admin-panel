@@ -1,6 +1,6 @@
 {
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true  
+    "source.fixAll.eslint": true
   },
   "path-intellisense.mappings": {
     "@": "${workspaceRoot}/src"
@@ -8,7 +8,7 @@
   "files.exclude": {
     "**/.git/objects/**": true,
     "**/.git/subtree-cache/**": true,
-    "**/node_modules/*/**": true,
+    "**/node_modules/*/**": true
     // "**/build/*/**": true
   },
   "files.watcherExclude": {
@@ -47,45 +47,31 @@
       {
         "scope": "comment",
         "settings": {
-          "foreground": "#416863",
+          "foreground": "#416863"
         }
       },
       {
         "scope": "string.quoted.single",
         "settings": {
-          "foreground": "#229977",
+          "foreground": "#229977"
         }
       },
       {
         "scope": "string.quoted.double",
         "settings": {
-          "foreground": "#229977",
+          "foreground": "#229977"
         }
-      },
+      }
     ]
   },
   "bracketPairColorizer.colorMode": "Independent",
   "bracketPairColorizer.independentPairColors": [
     [
       "()",
-      [
-        "#c5cae9"
-      ],
+      ["#c5cae9"],
       "Red" // use when right bracket is missing
     ],
-    [
-      "[]",
-      [
-        "#448aff"
-      ],
-      "Red"
-    ],
-    [
-      "{}",
-      [
-        "#90caf9"
-      ],
-      "Red"
-    ]
+    ["[]", ["#448aff"], "Red"],
+    ["{}", ["#90caf9"], "Red"]
   ]
 }

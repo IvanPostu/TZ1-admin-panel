@@ -63,19 +63,6 @@ export class OutsideClickWrapper extends Component<OutsideClickWrapperPropType> 
     this.callback(e)
   }
 
-  // handleClick() {
-  //   if (!this.state.popupVisible) {
-  //     // attach/remove event handler
-  //     document.addEventListener('click', this.handleOutsideClick, false)
-  //   } else {
-  //     document.removeEventListener('click', this.handleOutsideClick, false)
-  //   }
-
-  //   this.setState((prevState) => ({
-  //     popupVisible: !prevState.popupVisible,
-  //   }))
-  // }
-
   render() {
     return (
       <div className="popover-container" ref={this.node}>

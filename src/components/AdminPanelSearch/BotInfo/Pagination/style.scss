@@ -1,0 +1,36 @@
+@import '@/styles/colors.scss';
+@import '@/styles/mediaQueriesMixins.scss';
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
+  $borderProp: 1px solid $grayA;
+
+  button {
+
+
+    color: rgb(5, 68, 87);
+    padding: 8px 12px;
+    transition: background-color .3s;
+    border-right: $borderProp;
+    border-bottom: $borderProp;
+    border-top: $borderProp;
+    background: transparent;
+
+    @include mql(sm) {
+      padding: 6px 8px;
+    }
+
+  }
+
+  button:hover {
+    background: $grayA;
+  }
+
+  button:nth-child(1) {
+    border-left: $borderProp;
+  }
+
+}
