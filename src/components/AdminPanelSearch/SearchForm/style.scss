@@ -1,14 +1,18 @@
-@import '@/mixins/defaultMediaQueries.scss';
-@import '@/mixins/deviceSizes.scss';
-@import '@/mixins/colors.scss';
-@import '@/mixins/boxShadows.scss';
+@import '@/styles/mediaQueriesMixins.scss';
+@import '@/styles/deviceSizes.scss';
+@import '@/styles/colors.scss';
+@import '@/styles/boxShadows.scss';
+@import '@/styles/grid.scss';
 
 $searchInputHeight: 35px;
 
-.container {
+.row {
   display: flex;
   flex-wrap: wrap;
   box-sizing: border-box;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
   // border: 1px solid orange;
   flex-direction: row;
 
@@ -16,15 +20,13 @@ $searchInputHeight: 35px;
     flex-direction: column;
   }
 
-  .item {
+  .rowItem {
     flex: 1 1 calc(33.33% - 20px);
-    margin: .3rem 3px .3rem 3px;
+    margin: 0.3rem 3px 0.3rem 3px;
 
     display: flex;
     justify-content: center;
     align-items: center;
-
-
   }
 
   .box {
@@ -36,12 +38,14 @@ $searchInputHeight: 35px;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding: 1.5rem 0 1.5rem 0;
+    padding: .5rem 0 .5rem 0;
     // overflow: hidden;
     box-shadow: $boxShadowA;
+    height: 170px;
 
     @include mql(sm) {
       width: 100%;
+      height: 150px;
     }
 
     p {
@@ -52,49 +56,95 @@ $searchInputHeight: 35px;
     }
 
     .panelIcon {
-      font-size: 60px;
-      height: 60px;
+      font-size: 40px;
+      height: 40px;
       display: flex;
-      line-height: 60px;
+      line-height: 40px;
       text-align: center;
     }
 
     .tbox {
       max-width: 100%;
       height: $searchInputHeight;
-      line-height: 40px;
-      font-size: 20px;
-      background: #ecf0f1;
-      border-radius: 40px;
+      flex-direction: column;
       display: flex;
-      flex-direction: row;
-      justify-content: center;
+      align-items: center;
 
-      input[type="text"] {
-        border: none;
-        margin: 0 2px 0 6px;
-        background: none;
-        color: #34495e;
-        outline: none;
-        padding: 10px 0;
-        // border: 1px solid yellow;
-        font-size: 1.1rem;
+      div {
+        input[type='text'] {
+          border: 1px solid gray;
+          background: none;
+          color: #34495e;
+          outline: none;
+          padding: 2px 0;
+          font-size: 1.1rem;
+          height: 26px;
+        }
+
+        button {
+          height: 31px;
+          background: $grayB;
+        }
+
+        button:hover {
+          background: $grayC;
+        }
+      }
+
+
+
+    }
+
+
+
+    ul {
+      background: rgb(255, 255, 255);
+      max-width: 320px;
+      box-shadow: $boxShadowB;
+    }
+
+    li {
+      div.loader {
+        display: flex;
+        justify-content: center;
+        padding: 10px;
       }
 
       button {
-        padding: 0 3px 0 4px;
-        width: $searchInputHeight;
-        height: $searchInputHeight;
-        $brRadius: 20px;
-        border-top-right-radius: $brRadius;
-        border-bottom-right-radius: $brRadius;
-        background: $blueA;
+        font-family: sans-serif;
+        font-size: 15px;
+        color: rgb(36, 36, 36);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.13);
+        background: transparent;
 
-        .searchIcon {
-          font-size: $searchInputHeight - 5px;
+      }
 
-          color: white;
-        }
+      button:hover {
+        background: rgb(240, 240, 240);
+
+      }
+    }
+
+  }
+
+  .searchParametersMenu {
+    $searchParametersMenuW: 140px;
+    $searchParametersMenuH: 32px;
+
+    height: $searchParametersMenuH;
+    width: $searchParametersMenuW;
+    // border: 1px solid green;
+
+    div {
+      position: absolute;
+      // border: 1px solid red;
+      width: $searchParametersMenuW;
+
+      button {
+        height: $searchParametersMenuH;
+        width: $searchParametersMenuW;
+        background: $blueB;
+        color: white;
       }
 
       button:hover {
@@ -106,59 +156,23 @@ $searchInputHeight: 35px;
         background: $blueD;
       }
 
-    }
-
-    .searchParametersMenu {
-      $searchParametersMenuW: 140px;
-      $searchParametersMenuH: 32px;
-
-
-      height: $searchParametersMenuH;
-      width: $searchParametersMenuW;
-      // border: 1px solid green;
-
-      div {
-        position: absolute;
-        // border: 1px solid red;
-        width: $searchParametersMenuW;
+      ul {
+        box-shadow: $boxShadowA;
 
         button {
-          height: $searchParametersMenuH;
           width: $searchParametersMenuW;
-          background: $blueB;
-          color: white;
+          right: 10px;
+          height: 40px;
+          background: $grayA;
+          color: rgb(27, 27, 27);
+          padding: 2px 0 2px 0;
         }
 
         button:hover {
-          background: $blueC;
+          background: $grayB;
           cursor: pointer;
         }
-
-        button:active {
-          background: $blueD;
-        }
-
-        ul {
-          box-shadow: $boxShadowA;
-
-          button {
-            width: $searchParametersMenuW;
-            right: 10px;
-            height: 40px;
-            background: $grayA;
-            color: rgb(27, 27, 27);
-            padding: 2px 0 2px 0;
-          }
-
-          button:hover {
-            background: $grayB;
-            cursor: pointer;
-          }
-        }
-
       }
-
     }
-
   }
 }

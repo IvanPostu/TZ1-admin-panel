@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react'
-import { AdminPanelSearch } from '@/components/AdminPanelSearch/SearchForm/index'
+import { AdminPanel } from '@/components/AdminPanelSearch/AdminPanel'
 
 const AdminPage: React.FC = () => {
   return (
     <Fragment>
-      <AdminPanelSearch />
+      <AdminPanel />
     </Fragment>
   )
 }

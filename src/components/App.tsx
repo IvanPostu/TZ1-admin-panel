@@ -7,13 +7,11 @@ export const App: React.FC = (): React.ReactElement => {
   return (
     <BrowserRouter>
       <Navbar />
-      <div className="container">
-        <Switch>
-          {routes.map((item, index) => (
-            <Route {...item} key={index} />
-          ))}
-        </Switch>
-      </div>
+      <Switch>
+        {routes.map((item, index) => (
+          <Route {...item} key={index} />
+        ))}
+      </Switch>
     </BrowserRouter>
   )
 }

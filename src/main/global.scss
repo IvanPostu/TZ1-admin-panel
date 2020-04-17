@@ -1,7 +1,9 @@
-@import '@/mixins/defaultMediaQueries.scss';
-
 body {
   background: rgb(247, 247, 247);
+}
+
+#root {
+  min-height: 120vh;
 }
 
 ul {
@@ -14,26 +16,17 @@ a {
   text-decoration: none;
 }
 
+p {
+  margin: 0;
+}
+
+
 button {
   outline: none;
   text-decoration: none;
   border: none;
+  cursor: pointer;
 }
-
-.container {
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: auto;
-  margin-left: auto;
-
-  @include mql(sm) {
-    padding-right: 0;
-    padding-left: 0;
-  }
-
-}
-
-
 
 .px-1 {
   padding: 0 1rem 0 1rem;

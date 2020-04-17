@@ -139,7 +139,9 @@ module.exports = (env, opt) => {
 
           test: /\.(sa|sc|c)ss$/,
           use: [
-            MiniCssExtractPlugin.loader,
+            {
+              loader: isProd ? MiniCssExtractPlugin.loader : 'style-loader',
+            },
             {
               loader: 'css-loader',
               options: {
