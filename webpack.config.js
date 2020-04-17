@@ -12,6 +12,7 @@ const { SourceMapDevToolPlugin } = require('webpack')
 const isDev = process.env.NODE_ENV === 'development'
 const isProd = process.env.NODE_ENV === 'production'
 const PATH_TO_BUILD_FOLDER = path.resolve(__dirname, 'build')
+const PATH_TO_SRC_FOLDER = path.resolve(__dirname, 'frontend', 'src')
 
 module.exports = (env, opt) => {
   if (isDev === false && isProd === false) {
@@ -23,7 +24,7 @@ module.exports = (env, opt) => {
   return {
     mode: process.env.NODE_ENV,
 
-    context: path.resolve(__dirname, 'src'),
+    context: PATH_TO_SRC_FOLDER,
 
     entry: {
       app: './main/index.ts',
@@ -41,7 +42,7 @@ module.exports = (env, opt) => {
     resolve: {
       extensions: ['.ts', '.tsx', '.js'],
       alias: {
-        '@': path.resolve(__dirname, 'src'),
+        '@': PATH_TO_SRC_FOLDER,
       },
     },
 
@@ -52,7 +53,7 @@ module.exports = (env, opt) => {
       }),
       new CopyWebpackPlugin([
         {
-          from: path.resolve(__dirname, 'src', 'main', 'favicon.ico'),
+          from: path.resolve(PATH_TO_SRC_FOLDER, 'main', 'favicon.ico'),
           to: PATH_TO_BUILD_FOLDER,
         },
       ]),
@@ -73,7 +74,7 @@ module.exports = (env, opt) => {
 
     devServer: isDev
       ? {
-          contentBase: path.resolve(__dirname, 'build', 'devserver'),
+          contentBase: path.resolve(__dirname, 'devserver', 'build'),
           host: useLocalNetwork ? ip.address() : '127.0.0.1',
           port: 8000,
           hot: true,
@@ -131,7 +132,7 @@ module.exports = (env, opt) => {
           include: [
             // stylesheets in node_modules and src/styles/global
             path.resolve('./node_modules'),
-            path.resolve('./src/main/global.scss'),
+            path.resolve(PATH_TO_SRC_FOLDER, 'main', 'global.scss'),
           ],
         },
         {
@@ -156,9 +157,12 @@ module.exports = (env, opt) => {
           ],
           include: [
             // stylesheets in node_modules and src/styles/global
-            path.resolve('./src'),
+            path.resolve(PATH_TO_SRC_FOLDER),
           ],
-          exclude: [path.resolve('./node_modules'), path.resolve('./src/main/global.scss')],
+          exclude: [
+            path.resolve('./node_modules'),
+            path.resolve(PATH_TO_SRC_FOLDER, 'main', 'global.scss'),
+          ],
         },
         {
           test: /\.(svg|png|jpe?g|gif|ico)$/i,

@@ -1,0 +1,104 @@
+@import '@/styles/colors.scss';
+@import '@/styles/mediaQueriesMixins.scss';
+
+$navbarHeight: 44px;
+
+#navbarId {
+  background-color: $blueA;
+  height: $navbarHeight;
+
+  #navbarLogo {
+    font-size: 1.4rem;
+  }
+
+  .menuFlexContainer {
+    right: 0;
+    z-index: 77;
+    display: flex;
+    position: absolute;
+
+    >div {
+      text-align: end;
+      height: $navbarHeight;
+
+      @include mqg(md) {
+        display: none;
+      }
+
+      @include mql(md) {
+        display: block;
+      }
+    }
+
+    ul {
+      @include mqg(md) {
+        display: block !important;
+      }
+
+      @include mql(md) {
+        box-shadow: 0px 2px 7px 2px rgb(189, 189, 189);
+        display: none;
+      }
+
+      li {
+
+        @include mql(md) {
+          display: block;
+          background: $grayA;
+        }
+
+        @include mqg(md) {
+          display: inline;
+        }
+
+        .linkBtn {
+          height: $navbarHeight;
+          color: white;
+          background: transparent;
+
+          font-size: 1.1rem;
+          font-family: sans-serif;
+          padding: 0 6px 0 6px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+
+          @include mql(md) {
+            font-weight: bold;
+            width: 145px;
+            font-size: 0.95rem;
+            color: rgb(5, 15, 25);
+          }
+        }
+
+        .linkBtn:hover {
+          background: rgba(0, 0, 0, 0.155);
+        }
+
+        .linkBtn:active {
+          background: rgba(0, 0, 0, 0.195);
+        }
+      }
+    }
+
+    @include mqg(md) {
+      flex-direction: row;
+    }
+
+    @include mql(md) {
+      flex-direction: column;
+    }
+  }
+
+
+  .menuIcon {
+    margin-right: 1rem;
+    font-size: $navbarHeight;
+    color: rgb(36, 36, 36);
+    cursor: pointer;
+  }
+
+  .menuIcon:hover {
+    background: rgba(0, 0, 0, 0.11);
+  }
+}

@@ -1,0 +1,14 @@
+@import './mediaQueriesMixins.scss';
+
+.container {
+  max-width: 1024px;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+
+  @include mql(sm) {
+    padding-right: 2px;
+    padding-left: 2px;
+  }
+}

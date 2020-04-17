@@ -3,7 +3,7 @@
     "source.fixAll.eslint": true
   },
   "path-intellisense.mappings": {
-    "@": "${workspaceRoot}/src"
+    "@": "${workspaceRoot}/frontend/src"
   },
   "files.exclude": {
     "**/.git/objects/**": true,
