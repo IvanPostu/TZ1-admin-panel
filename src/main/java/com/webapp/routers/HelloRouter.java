@@ -1,6 +1,6 @@
 //package com.webapp.routers;
 //
-//import com.webapp.handlers.MainHandler;
+//import com.webapp.handlers.HelloHandler;
 //import org.springframework.context.annotation.Bean;
 //import org.springframework.context.annotation.Configuration;
 //import org.springframework.web.reactive.function.server.RequestPredicates;
@@ -10,14 +10,14 @@
 //
 //
 //@Configuration
-//public class MainRouter {
+//public class HelloRouter {
 //  @Bean
-//  public RouterFunction<ServerResponse> route(MainHandler mainHandler ) {
+//  public RouterFunction<ServerResponse> route(HelloHandler helloHandler) {
 //
 //    return RouterFunctions
 //        .route(
-//            RequestPredicates.GET("/"),
-//            mainHandler::index
+//            RequestPredicates.GET("/api/hello"),
+//            helloHandler::hello
 //        );
 //  }
 //}

@@ -17,6 +17,7 @@ const PATH_TO_SRC_FOLDER = path.resolve(__dirname, 'frontend', 'src')
 
 /**
  * backend index.html depends on this file
+ * and output bundle with this name added to gitignore
  */
 const OUTPUT_HTML_FILENAME = 'generated.html'
 
@@ -33,16 +34,19 @@ module.exports = (env, opt) => {
     context: PATH_TO_SRC_FOLDER,
 
     entry: {
-      app: './main/index.ts',
+      app: path.resolve(PATH_TO_SRC_FOLDER, 'main', 'index.ts'),
     },
 
     output: {
-      filename: isProd ? '[name]_[contenthash].js' : '[name].dev.js',
+      filename: isProd ? 'js/[name]_[contenthash].js' : 'js/[name].dev.js',
       path: PATH_TO_BUILD_FOLDER,
       publicPath: '/',
-      chunkFilename: isProd ? '[name]_[contenthash].bundle.js' : '[name]_[hash]_bundle.dev.js',
+      // chunkFilename: isProd ? '[name]_[contenthash].bundle.js' : '[name]_bundle.dev.js',
     },
 
+    /**
+     * For development I use SourceMapDevToolPlugin from webpack
+     */
     devtool: false,
 
     resolve: {
@@ -55,7 +59,7 @@ module.exports = (env, opt) => {
     plugins: [
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
-        template: './main/index.html',
+        template: path.resolve(PATH_TO_SRC_FOLDER, 'main', 'index.html'),
         filename: '../templates/' + OUTPUT_HTML_FILENAME,
       }),
       new CopyWebpackPlugin([
@@ -64,9 +68,13 @@ module.exports = (env, opt) => {
           to: PATH_TO_BUILD_FOLDER,
         },
       ]),
-      new MiniCssExtractPlugin({
-        filename: 'css/[hash].css',
-      }),
+      ...(isProd
+        ? [
+            new MiniCssExtractPlugin({
+              filename: 'css/[contenthash].css',
+            }),
+          ]
+        : []),
       ...(isDev
         ? [
             new SourceMapDevToolPlugin({

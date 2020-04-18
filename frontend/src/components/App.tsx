@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Switch, BrowserRouter, Route } from 'react-router-dom'
 import { routes } from '@/routes/routes'
 import { Navbar } from '@/components/Navbar/index'
 import { Footer } from '@/components/Footer'
 
 export const App: React.FC = (): React.ReactElement => {
+  // useEffect(() => {
+  //   fetch('api/hello').then((e) => e.text().then((itm) => console.log(itm)))
+  // }, [])
+
   return (
     <BrowserRouter>
       <Navbar />
