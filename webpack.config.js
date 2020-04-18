@@ -11,8 +11,14 @@ const { SourceMapDevToolPlugin } = require('webpack')
 
 const isDev = process.env.NODE_ENV === 'development'
 const isProd = process.env.NODE_ENV === 'production'
-const PATH_TO_BUILD_FOLDER = path.resolve(__dirname, 'build')
+
+const PATH_TO_BUILD_FOLDER = path.resolve(__dirname, 'src', 'main', 'resources', 'static')
 const PATH_TO_SRC_FOLDER = path.resolve(__dirname, 'frontend', 'src')
+
+/**
+ * backend index.html depends on this file
+ */
+const OUTPUT_HTML_FILENAME = 'generated.html'
 
 module.exports = (env, opt) => {
   if (isDev === false && isProd === false) {
@@ -31,7 +37,7 @@ module.exports = (env, opt) => {
     },
 
     output: {
-      filename: isProd ? '[name]_[contenthash].js' : '[name]_[hash].dev.js',
+      filename: isProd ? '[name]_[contenthash].js' : '[name].dev.js',
       path: PATH_TO_BUILD_FOLDER,
       publicPath: '/',
       chunkFilename: isProd ? '[name]_[contenthash].bundle.js' : '[name]_[hash]_bundle.dev.js',
@@ -50,6 +56,7 @@ module.exports = (env, opt) => {
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         template: './main/index.html',
+        filename: '../templates/' + OUTPUT_HTML_FILENAME,
       }),
       new CopyWebpackPlugin([
         {
@@ -74,11 +81,12 @@ module.exports = (env, opt) => {
 
     devServer: isDev
       ? {
-          contentBase: path.resolve(__dirname, 'devserver', 'build'),
+          contentBase: path.resolve(__dirname, 'dist'),
           host: useLocalNetwork ? ip.address() : '127.0.0.1',
           port: 8000,
           hot: true,
           historyApiFallback: true,
+          writeToDisk: true,
         }
       : {},
 
@@ -94,7 +102,6 @@ module.exports = (env, opt) => {
       },
       minimizer: isProd ? [new OptimizeCssAssetWebpackPlugin(), new TerserWebpackPlugin()] : [],
     },
-
     module: {
       rules: [
         {
@@ -119,7 +126,10 @@ module.exports = (env, opt) => {
 
           test: /\.(sa|sc|c)ss$/,
           use: [
-            MiniCssExtractPlugin.loader,
+            {
+              loader: isProd ? MiniCssExtractPlugin.loader : 'style-loader',
+              // loader: MiniCssExtractPlugin.loader,
+            },
             {
               loader: 'css-loader',
               options: {
@@ -142,6 +152,7 @@ module.exports = (env, opt) => {
           use: [
             {
               loader: isProd ? MiniCssExtractPlugin.loader : 'style-loader',
+              // loader: MiniCssExtractPlugin.loader,
             },
             {
               loader: 'css-loader',

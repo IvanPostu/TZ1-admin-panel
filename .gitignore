@@ -34,3 +34,6 @@ build/
 *.ipr
 out/
 
+### assembled frontend ###
+/src/main/resources/static
+/src/main/resources/templates/generated.html
