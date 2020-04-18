@@ -1,1 +1,0 @@
-export { OutsideClickWrapper } from './OutsideClickWrapper'
