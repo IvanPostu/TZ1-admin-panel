@@ -1,6 +1,8 @@
 package com.webapp.domain.entity;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -10,6 +12,8 @@ import java.util.Set;
 @Entity
 @Table(name = "app_user")
 @NoArgsConstructor
+@Getter
+@Setter
 public class UserEntity {
 
   @Id
@@ -25,6 +29,9 @@ public class UserEntity {
 
   @Column(name = "email", columnDefinition = "varchar(64)", nullable = true)
   private String email;
+
+  @Column(name = "avatar_filename")
+  private String avatarFilename;
 
   @Column(name = "birth_date", nullable = true)
   private Date birthDate;

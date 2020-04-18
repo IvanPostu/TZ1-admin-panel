@@ -1,6 +1,8 @@
 package com.webapp.domain.entity;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -10,6 +12,8 @@ import java.util.Set;
 @Entity
 @Table(name = "bot")
 @NoArgsConstructor
+@Getter
+@Setter
 public class BotEntity {
 
   @Id
@@ -17,8 +21,14 @@ public class BotEntity {
   @Column(name="id", unique = true, nullable = false)
   private Integer id;
 
-  @Column(name = "name", nullable = false, updatable = false)
   private String name;
+
+  @ManyToOne( fetch=FetchType.EAGER )
+  @JoinColumn(name="category_id")
+  private BotCategoryEntity category;
+
+  @Column(name = "avatar_filename")
+  private String avatarFilename;
 
   @ManyToMany
   @JoinTable(
