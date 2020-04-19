@@ -1,7 +1,7 @@
 
 CREATE TABLE app_user (
   id  SERIAL NOT NULL, 
-  birth_date TIMESTAMP, 
+  birth_date DATE, 
   email VARCHAR(64), 
   firstname VARCHAR(64), 
   lastname VARCHAR(64), 

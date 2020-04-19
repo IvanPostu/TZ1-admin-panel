@@ -33,7 +33,7 @@ public class UserEntity {
   @Column(name = "avatar_filename")
   private String avatarFilename;
 
-  @Column(name = "birth_date", nullable = true)
+  @Column(name = "birth_date", columnDefinition = "DATE")
   private Date birthDate;
 
 

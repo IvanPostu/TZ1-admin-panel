@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path')
-const ip = require('ip')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
@@ -15,18 +14,12 @@ const isProd = process.env.NODE_ENV === 'production'
 const PATH_TO_BUILD_FOLDER = path.resolve(__dirname, 'src', 'main', 'resources', 'static')
 const PATH_TO_SRC_FOLDER = path.resolve(__dirname, 'frontend', 'src')
 
-/**
- * backend index.html depends on this file
- * and output bundle with this name added to gitignore
- */
 const OUTPUT_HTML_FILENAME = 'generated.html'
 
-module.exports = (env, opt) => {
+module.exports = (/*env, opt*/) => {
   if (isDev === false && isProd === false) {
     throw new Error('NODE_ENV is not defined')
   }
-
-  const useLocalNetwork = opt.localNetwork === 'true'
 
   return {
     mode: process.env.NODE_ENV,
@@ -41,7 +34,6 @@ module.exports = (env, opt) => {
       filename: isProd ? 'js/[name]_[contenthash].js' : 'js/[name].dev.js',
       path: PATH_TO_BUILD_FOLDER,
       publicPath: '/',
-      // chunkFilename: isProd ? '[name]_[contenthash].bundle.js' : '[name]_bundle.dev.js',
     },
 
     /**
@@ -90,7 +82,7 @@ module.exports = (env, opt) => {
     devServer: isDev
       ? {
           contentBase: path.resolve(__dirname, 'dist'),
-          host: useLocalNetwork ? ip.address() : '127.0.0.1',
+          host: false,
           port: 8000,
           hot: true,
           historyApiFallback: true,
