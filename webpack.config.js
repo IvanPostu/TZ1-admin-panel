@@ -33,7 +33,7 @@ module.exports = (/*env, opt*/) => {
     output: {
       filename: isProd ? 'js/[name]_[contenthash].js' : 'js/[name].dev.js',
       path: PATH_TO_BUILD_FOLDER,
-      publicPath: '/',
+      publicPath: isDev ? 'http://127.0.0.1:8000/' : '/',
     },
 
     /**
@@ -87,6 +87,11 @@ module.exports = (/*env, opt*/) => {
           hot: true,
           historyApiFallback: true,
           writeToDisk: true,
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+            'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization',
+          },
         }
       : {},
 
@@ -128,7 +133,6 @@ module.exports = (/*env, opt*/) => {
           use: [
             {
               loader: isProd ? MiniCssExtractPlugin.loader : 'style-loader',
-              // loader: MiniCssExtractPlugin.loader,
             },
             {
               loader: 'css-loader',
@@ -152,7 +156,6 @@ module.exports = (/*env, opt*/) => {
           use: [
             {
               loader: isProd ? MiniCssExtractPlugin.loader : 'style-loader',
-              // loader: MiniCssExtractPlugin.loader,
             },
             {
               loader: 'css-loader',

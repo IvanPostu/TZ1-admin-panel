@@ -17,7 +17,7 @@ $navbarHeight: 44px;
     display: flex;
     position: absolute;
 
-    >div {
+    > div {
       text-align: end;
       height: $navbarHeight;
 
@@ -41,7 +41,6 @@ $navbarHeight: 44px;
       }
 
       li {
-
         @include mql(md) {
           display: block;
           background: $grayA;
@@ -89,7 +88,6 @@ $navbarHeight: 44px;
       flex-direction: column;
     }
   }
-
 
   .menuIcon {
     margin-right: 1rem;

@@ -29,7 +29,7 @@ DECLARE
   imagename varchar(100);
   image_index INTEGER;
 BEGIN
-  for i IN 1..n LOOP
+  FOR i IN 1..n LOOP
     image_index := random_int_range(1,10);
     IF image_index < 8 
     THEN

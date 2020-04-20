@@ -1,5 +1,7 @@
 package com.webapp.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,8 +21,10 @@ public class BotEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name="id", unique = true, nullable = false)
+  @JsonView(Views.IdName.class)
   private Integer id;
 
+  @JsonView(Views.IdName.class)
   private String name;
 
   @ManyToOne( fetch=FetchType.EAGER )
