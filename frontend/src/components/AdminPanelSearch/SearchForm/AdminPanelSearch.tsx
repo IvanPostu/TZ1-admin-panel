@@ -1,7 +1,7 @@
 import React, { PureComponent, PropsWithChildren } from 'react'
 
 import style from './style.scss'
-import BotFindForm from './BotFindForm'
+import BotFindForm from './BotFindForm/BotFindFormContainer'
 import { UserFindForm } from './UserFindForm'
 
 export class AdminPanelSearch extends PureComponent<PropsWithChildren<{}>> {

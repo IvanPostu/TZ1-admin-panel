@@ -1,8 +1,8 @@
 package com.webapp.handlers;
 
-import com.webapp.domain.entity.BotEntity;
-import com.webapp.domain.entity.Views;
-import com.webapp.persistence.BotRepository;
+import com.webapp.domain.dto.FindBotResultDto;
+import com.webapp.domain.dto.Views;
+import com.webapp.service.BotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
@@ -13,25 +13,16 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.awt.print.Pageable;
+import java.util.HashMap;
+import java.util.Map;
 
 @Component
 public class BotHandler {
 
   @Autowired
-  private BotRepository botRepository;
+  private BotService botService;
 
-  public Mono<ServerResponse> bots(ServerRequest request) {
 
-    Flux<BotEntity> data = Flux
-        .fromIterable(botRepository.findAll());
-
-    return ServerResponse
-        .ok()
-        .hint(Jackson2CodecSupport.JSON_VIEW_HINT, Views.IdName.class)
-        .contentType(MediaType.APPLICATION_JSON)
-        .body(data, BotEntity.class);
-  }
 
   public Mono<ServerResponse> findBotsByName(ServerRequest request){
     final String botName = request
@@ -47,14 +38,25 @@ public class BotHandler {
         .orElse(0);
     PageRequest pageRequest = PageRequest.of(currentPage, botsPerPage);
 
-    Flux<BotEntity> data = Flux
-        .fromIterable(botRepository.findBotByNameSubstring(botName, pageRequest));
+    Mono<FindBotResultDto> data = Flux
+        .fromIterable(botService.findBotByNameSubstring(botName, pageRequest))
+        .reduce(new FindBotResultDto(), (acc, itm)->{
+          acc.getBots().put(itm.getId(), itm);
+          return acc;
+        })
+        .map(a -> {
+          a.setName(botName);
+          a.setCurrentPage(pageRequest.getPageNumber());
+          return a;
+        });
+
+
 
     return ServerResponse
         .ok()
-        .hint(Jackson2CodecSupport.JSON_VIEW_HINT, Views.IdName.class)
+        .hint(Jackson2CodecSupport.JSON_VIEW_HINT, Views.FindBotDtoData.class)
         .contentType(MediaType.APPLICATION_JSON)
-        .body(data, BotEntity.class);
+        .body(data, FindBotResultDto.class);
 
   }
 

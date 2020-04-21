@@ -1,7 +1,5 @@
 package com.webapp.config;
 
-import com.fasterxml.jackson.annotation.JsonView;
-import com.webapp.domain.entity.Views;
 import com.webapp.handlers.BotHandler;
 import com.webapp.handlers.MainHandler;
 import org.springframework.context.annotation.Bean;
@@ -12,6 +10,8 @@ import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.RouterFunctions;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
+import java.net.URI;
+
 @Configuration
 public class RoutesConfig {
 
@@ -20,7 +20,7 @@ public class RoutesConfig {
 
     return RouterFunctions
         .route(
-            RequestPredicates.GET("/"),
+            RequestPredicates.GET("*"),
             mainHandler::index
         );
   }
@@ -30,14 +30,11 @@ public class RoutesConfig {
 
     return RouterFunctions
         .route(
-            RequestPredicates.GET("/api/bots/q"),
-            botHandler::bots
-        )
-        .andRoute(
             RequestPredicates.GET("/api/bots")
                 .and(RequestPredicates.accept(MediaType.APPLICATION_JSON)),
             botHandler::findBotsByName
         );
   }
+
 
 }

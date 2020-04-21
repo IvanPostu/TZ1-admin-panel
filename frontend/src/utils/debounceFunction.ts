@@ -1,5 +1,5 @@
 export default function debounce<Params extends any[]>(
-  func: (...args: Params) => any,
+  func: (...args: Params) => void,
   timeout: number,
 ): (...args: Params) => void {
   let timer: NodeJS.Timeout

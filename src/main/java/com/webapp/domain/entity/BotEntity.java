@@ -32,6 +32,7 @@ public class BotEntity {
   private BotCategoryEntity category;
 
   @Column(name = "avatar_filename")
+  @JsonView(Views.IconFilename.class)
   private String avatarFilename;
 
   @ManyToMany

@@ -5,7 +5,10 @@ export type BotType = {
 }
 
 export type BotsStateType = {
-  bots: Array<BotType>
-  isFetch: boolean
+  bots: Map<number, BotType>
+  isLoading: boolean
   searchValue: string
+  currentPage: number
 }
+
+// export { BotsRootActionType } from '@/store/Bots/actionCreators'
