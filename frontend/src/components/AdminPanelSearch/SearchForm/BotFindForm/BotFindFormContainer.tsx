@@ -43,7 +43,6 @@ const BotFindForm: FunctionComponent<BotFindFormPropType> = (props) => {
     props.fetchNextPageBots()
   }
   const showBotListCondition = resultIsShowed && (props.bots.length > 0 || props.isLoading)
-
   return (
     <div className={style.box}>
       <IoIosCog className={style.panelIcon} />
@@ -60,6 +59,7 @@ const BotFindForm: FunctionComponent<BotFindFormPropType> = (props) => {
           <div>
             <input
               onChange={(e) => {
+                if (!resultIsShowed) setResultIsShowed(true)
                 if (!props.isLoading) props.startLoading()
                 if (props.bots.length > 0) props.clearBots()
                 inputChangeWithDebounce(e.target.value)
