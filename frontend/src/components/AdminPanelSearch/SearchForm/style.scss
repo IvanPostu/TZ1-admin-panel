@@ -94,8 +94,8 @@ $searchInputHeight: 35px;
 
     ul {
       background: rgb(255, 255, 255);
-      max-width: 320px;
-      min-height: 300px;
+      width: 280px;
+      min-height: 200px;
       overflow-y: auto;
       box-shadow: $boxShadowB;
     }
@@ -113,6 +113,8 @@ $searchInputHeight: 35px;
         color: rgb(36, 36, 36);
         border-bottom: 1px solid rgba(0, 0, 0, 0.13);
         background: transparent;
+        width: 100%;
+        min-height: 40px;
       }
 
       button:hover {

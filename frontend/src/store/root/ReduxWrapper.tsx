@@ -12,7 +12,7 @@ declare const window: Window & typeof globalThis & REDUX_DEVTOOLS_TYPE
 
 const sagaMiddleware = createSagaMiddleware()
 
-const store = createStore(
+export const store = createStore(
   rootReducer,
   compose(
     applyMiddleware(sagaMiddleware),

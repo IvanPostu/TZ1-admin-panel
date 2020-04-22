@@ -1,34 +1,50 @@
-import { BotType, BotsStateType } from './index'
-// import { BotsRootActionType } from '@/store/Bots'
-import { ActionTypes } from './types'
-import { Reducer, Action } from 'redux'
-import { FetchBotsActionType, UpdateBotsActionType } from './actionCreators'
-// import { UpdateBotsActionType } from './actionCreators'
+import { BotsRootActionType, BotType, botActionTypeConstants } from './types'
+import { Reducer } from 'redux'
 
-const initialState: BotsStateType = {
-  bots: new Map<number, BotType>(),
-  isLoading: false,
-  currentPage: 0,
-  searchValue: '',
+type BotsStateType = {
+  bots: Array<BotType>
+  isLoading: boolean
+  searchValue: string
+  currentPage: number
+  haveNextPage: boolean
+  errorMessage: string
 }
 
-const botsReducer: Reducer<BotsStateType, FetchBotsActionType | Action | UpdateBotsActionType> = (
+const initialState: BotsStateType = {
+  bots: new Array<BotType>(),
+  isLoading: false,
+  haveNextPage: false,
+  currentPage: 0,
+  searchValue: '',
+  errorMessage: '',
+}
+
+const botsReducer: Reducer<BotsStateType, BotsRootActionType> = (
   state = initialState,
   action,
 ): BotsStateType => {
   switch (action.type) {
-    case ActionTypes.LOADING_START: {
+    case botActionTypeConstants.LOADING_START:
       return { ...state, isLoading: true }
-    }
-    case ActionTypes.LOADING_END: {
+    case botActionTypeConstants.LOADING_END:
       return { ...state, isLoading: false }
-    }
-    case ActionTypes.UPDATE_BOTS: {
+    case botActionTypeConstants.UPDATE_BOTS:
       return {
         ...state,
-        // ...payload,
+        ...action.payload,
+        errorMessage: '',
       }
-    }
+    case botActionTypeConstants.CLEAR_BOTS:
+      return {
+        ...state,
+        bots: [],
+      }
+    case botActionTypeConstants.REQUEST_ERROR:
+      return {
+        ...state,
+        errorMessage: action.payload,
+      }
+
     default:
       return state
   }

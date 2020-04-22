@@ -10,11 +10,7 @@ import org.springframework.http.codec.json.Jackson2CodecSupport;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Component
 public class BotHandler {
@@ -30,7 +26,10 @@ public class BotHandler {
         .orElse("");
     final int botsPerPage = request
         .queryParam("bots-per-page")
-        .map(Integer::valueOf)
+        .map( a -> {
+          int result = Integer.parseInt(a);
+          return Math.min(result, 100);
+        })
         .orElse(7);
     final int currentPage = request
         .queryParam("current-page")
@@ -38,17 +37,27 @@ public class BotHandler {
         .orElse(0);
     PageRequest pageRequest = PageRequest.of(currentPage, botsPerPage);
 
-    Mono<FindBotResultDto> data = Flux
-        .fromIterable(botService.findBotByNameSubstring(botName, pageRequest))
-        .reduce(new FindBotResultDto(), (acc, itm)->{
-          acc.getBots().put(itm.getId(), itm);
-          return acc;
-        })
-        .map(a -> {
-          a.setName(botName);
-          a.setCurrentPage(pageRequest.getPageNumber());
-          return a;
+    Mono<FindBotResultDto> data = Mono
+        .just(botService.findBotByNameSubstring(botName, pageRequest))
+        .map( a -> {
+          FindBotResultDto result = new FindBotResultDto();
+          result.setBots(a.getContent());
+          result.setName(botName);
+          result.setCurrentPage(a.getNumber());
+          result.setHaveNextPage(a.hasNext());
+          return result;
         });
+//        .reduce(new FindBotResultDto(), (acc, itm)->{
+//          acc.getBots().add(itm);
+//          return acc;
+//        })
+//        .map(a -> {
+//          a.
+//          a.setName(botName);
+//          a.setCurrentPage(pageRequest.getPageNumber());
+//          a.setHaveNextPage(pageRequest.getPageNumber()<=pageRequest.getPageSize());
+//          return a;
+//        });
 
 
 

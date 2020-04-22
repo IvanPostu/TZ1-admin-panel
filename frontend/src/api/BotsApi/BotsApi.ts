@@ -1,9 +1,8 @@
 import { url } from '@/api/url'
 
 /**
- * @throws exceprion if request failed or json parse error
- * @todo write block try/catch
  *
+ * @throws
  *
  * @RequestResult
  * {
@@ -12,7 +11,7 @@ import { url } from '@/api/url'
  *    bots: Map<number, {id, name, avatarFilename}>
  * }
  */
-export async function fetchBots(name = '', currentPage = 0, botsPerPage = 7) {
+export async function fetchBots(name = '', currentPage = 0, botsPerPage = 8) {
   const options: RequestInit = {
     method: 'GET',
     headers: {
@@ -26,8 +25,10 @@ export async function fetchBots(name = '', currentPage = 0, botsPerPage = 7) {
   urlWithParams.searchParams.append('name', String(name))
   urlWithParams.searchParams.append('bots-per-page', String(botsPerPage))
 
-  const json = await fetch(`${urlWithParams}`, options)
-  const data = await json.json()
+  const result = await fetch(`${urlWithParams}`, options)
 
+  if (!result.ok) throw new Error('Request failed...')
+
+  const data = await result.json()
   return data
 }

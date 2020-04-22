@@ -1,14 +1,16 @@
 import React, { PropsWithChildren, FC } from 'react'
 import { Loader } from '@/components/LoaderA/Loader'
 import style from '../style.scss'
-import { BotType } from '@/store/Bots'
+import { BotType } from '@/store/Bots/types'
 
 type LocalPropType = PropsWithChildren<{}> & {
   isLoading: boolean
-  bots: Map<number, BotType>
+  bots: Array<BotType>
+  haveNextPage: boolean
+  onSeeMoreClick: () => void
 }
 
-export const BotList: FC<LocalPropType> = ({ bots, isLoading }) => {
+export const BotList: FC<LocalPropType> = ({ bots, isLoading, haveNextPage, onSeeMoreClick }) => {
   return (
     <ul>
       {isLoading && (
@@ -18,16 +20,18 @@ export const BotList: FC<LocalPropType> = ({ bots, isLoading }) => {
           </div>
         </li>
       )}
-
-      {Array.from(bots).map(([key, val]) => (
-        <li key={key}>
-          <button>{val}</button>
+      {bots.map((item) => (
+        <li key={item.id}>
+          <button>{item.name}</button>
         </li>
       ))}
+      {haveNextPage && !isLoading && (
+        <li>
+          <button onClick={onSeeMoreClick} style={{ color: 'teal' }}>
+            Смотреть больше
+          </button>
+        </li>
+      )}
     </ul>
   )
-}
-
-BotList.defaultProps = {
-  bots: new Map(),
 }

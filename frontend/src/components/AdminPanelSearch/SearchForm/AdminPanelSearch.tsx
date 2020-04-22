@@ -9,7 +9,7 @@ export class AdminPanelSearch extends PureComponent<PropsWithChildren<{}>> {
     return (
       <div className={style.container}>
         <div className={style.row}>
-          <div className={style.rowItem} style={{ flexGrow: 3, zIndex: 4 }}>
+          <div className={style.rowItem} style={{ flexGrow: 3, zIndex: 5 }}>
             <BotFindForm />
           </div>
           <div className={style.rowItem} style={{ flexGrow: 3, zIndex: 4 }}>

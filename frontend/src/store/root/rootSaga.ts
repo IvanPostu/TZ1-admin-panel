@@ -1,6 +1,6 @@
 import { all } from 'redux-saga/effects'
-import { sagaWatcher } from '@/store/Bots/botsSagas'
+import { fetchBotsSagaWatcher, fetchNextPageBotsSagaWatcher } from '@/store/Bots/botsSagas'
 
 export default function* () {
-  yield all([sagaWatcher()])
+  yield all([fetchBotsSagaWatcher(), fetchNextPageBotsSagaWatcher()])
 }

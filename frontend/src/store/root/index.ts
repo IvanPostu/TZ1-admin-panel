@@ -1,1 +1,1 @@
-export { ReduxWrapper } from './ReduxWrapper'
+export { ReduxWrapper, store } from './ReduxWrapper'

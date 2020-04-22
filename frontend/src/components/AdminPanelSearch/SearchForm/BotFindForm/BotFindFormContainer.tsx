@@ -3,14 +3,15 @@ import style from '../style.scss'
 import { IoIosSearch, IoIosCog } from 'react-icons/io'
 import { OutsideClickWrapper } from '@/components/OutsideClickWrapper'
 import { connect } from 'react-redux'
-import { bindActionCreators, Dispatch, AnyAction } from 'redux'
-import { fetchBots, startLoading } from '@/store/Bots/actionCreators'
+import { bindActionCreators, Dispatch } from 'redux'
+import { fetchBots, fetchNextPageBots, startLoading, clearBots } from '@/store/Bots/actionCreators'
 import { BotList } from '@/components/AdminPanelSearch/SearchForm/BotFindForm/BotList'
 import { GlobalStateType } from '@/store'
+import { BotsRootActionType } from '@/store/Bots/types'
 import debounce from '@/utils/debounceFunction'
 
-function mapDispatchToProps(dispatch: Dispatch<AnyAction>) {
-  const actionCreators = { fetchBots, startLoading }
+function mapDispatchToProps(dispatch: Dispatch<BotsRootActionType>) {
+  const actionCreators = { fetchBots, startLoading, clearBots, fetchNextPageBots }
   return bindActionCreators(actionCreators, dispatch)
 }
 
@@ -18,6 +19,7 @@ function mapStateToProps(state: GlobalStateType) {
   return {
     isLoading: state.botsReducer.isLoading,
     bots: state.botsReducer.bots,
+    haveNextPage: state.botsReducer.haveNextPage,
   }
 }
 
@@ -37,6 +39,10 @@ const BotFindForm: FunctionComponent<BotFindFormPropType> = (props) => {
       props.fetchBots(textInput)
     }
   }, 2000)
+  const onSeeMoreClick = () => {
+    props.fetchNextPageBots()
+  }
+  const showBotListCondition = resultIsShowed && (props.bots.length > 0 || props.isLoading)
 
   return (
     <div className={style.box}>
@@ -55,6 +61,7 @@ const BotFindForm: FunctionComponent<BotFindFormPropType> = (props) => {
             <input
               onChange={(e) => {
                 if (!props.isLoading) props.startLoading()
+                if (props.bots.length > 0) props.clearBots()
                 inputChangeWithDebounce(e.target.value)
               }}
               ref={refToSearchInput}
@@ -62,16 +69,19 @@ const BotFindForm: FunctionComponent<BotFindFormPropType> = (props) => {
               type="text"
               maxLength={50}
             />
-            <button
-              onClick={() => {
-                //
-              }}
-            >
+            <button>
               <IoIosSearch />
             </button>
           </div>
 
-          {resultIsShowed && <BotList isLoading={props.isLoading} bots={props.bots} />}
+          {showBotListCondition && (
+            <BotList
+              onSeeMoreClick={onSeeMoreClick}
+              haveNextPage={props.haveNextPage}
+              isLoading={props.isLoading}
+              bots={props.bots}
+            />
+          )}
         </div>
       </OutsideClickWrapper>
     </div>

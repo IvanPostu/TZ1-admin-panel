@@ -1,39 +1,20 @@
-import { ActionTypes } from './types'
-import { Action } from 'redux'
-import { BotType } from '@/store/Bots'
-
-type FetchBotsActionPayloadType = {
-  name: string
-  page: number
-  botsPerPage: number
-}
-
-export interface FetchBotsActionType extends Action<ActionTypes> {
-  type: ActionTypes.FETCH_BOTS
-  payload: FetchBotsActionPayloadType
-}
-
-export type StartLoadingType = Action<ActionTypes>
-
-export type StopLoadingType = Action<ActionTypes>
-
-type UpdateBotsActionPayloadType = {
-  currentPage: number
-  searchValue: string
-  bots: Map<number, BotType>
-}
-
-export interface UpdateBotsActionType extends Action<ActionTypes> {
-  type: ActionTypes.UPDATE_BOTS
-  payload: UpdateBotsActionPayloadType
-}
+import { botActionTypeConstants } from './types'
+import {
+  BotType,
+  FetchBotsActionType,
+  FetchNextPageBotsActionType,
+  StartLoadingType,
+  StopLoadingType,
+  UpdateBotsActionType,
+  ClearBotsActionType,
+  RequestErrorActionType,
+} from '@/store/Bots/types'
 
 /**
- * Action results
+ * This action creator is handled by saga
  */
-
 export const fetchBots = (name: string, page = 0, botsPerPage = 0): FetchBotsActionType => ({
-  type: ActionTypes.FETCH_BOTS,
+  type: botActionTypeConstants.FETCH_BOTS,
   payload: {
     name,
     page,
@@ -41,28 +22,41 @@ export const fetchBots = (name: string, page = 0, botsPerPage = 0): FetchBotsAct
   },
 })
 
+/**
+ * This action creator is handled by saga
+ */
+export const fetchNextPageBots = (): FetchNextPageBotsActionType => ({
+  type: botActionTypeConstants.FETCH_NEXT_PAGE,
+})
+
 export const updateBots = (
-  bots: Map<number, BotType>,
+  bots: Array<BotType>,
   searchValue: string,
+  haveNextPage: boolean,
   currentPage = 0,
 ): UpdateBotsActionType => ({
-  type: ActionTypes.UPDATE_BOTS,
+  type: botActionTypeConstants.UPDATE_BOTS,
   payload: {
     bots,
+    haveNextPage,
     currentPage,
     searchValue,
   },
 })
 
 export const startLoading = (): StartLoadingType => ({
-  type: ActionTypes.LOADING_START,
+  type: botActionTypeConstants.LOADING_START,
 })
 
 export const stopLoading = (): StopLoadingType => ({
-  type: ActionTypes.LOADING_END,
+  type: botActionTypeConstants.LOADING_END,
 })
 
-// export type BotsRootActionType = FetchBotsActionType &
-//   StartLoadingType &
-//   StopLoadingType &
-//   UpdateBotsActionType
+export const clearBots = (): ClearBotsActionType => ({
+  type: botActionTypeConstants.CLEAR_BOTS,
+})
+
+export const requestError = (errorMsg: string): RequestErrorActionType => ({
+  type: botActionTypeConstants.REQUEST_ERROR,
+  payload: errorMsg,
+})

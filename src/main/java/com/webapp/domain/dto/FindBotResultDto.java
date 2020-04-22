@@ -5,8 +5,8 @@ import com.webapp.domain.entity.BotEntity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.LinkedList;
+import java.util.List;
 
 
 @NoArgsConstructor
@@ -20,7 +20,9 @@ public class FindBotResultDto {
   private Integer currentPage;
 
   @JsonView(Views.FindBotDtoData.class)
-  private Map<Integer, BotEntity> bots = new HashMap<>();
+  private List<BotEntity> bots = new LinkedList<>();
 
+  @JsonView(Views.FindBotDtoData.class)
+  private Boolean haveNextPage;
 
 }
