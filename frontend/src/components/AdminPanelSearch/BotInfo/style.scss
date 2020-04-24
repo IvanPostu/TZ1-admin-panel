@@ -89,13 +89,25 @@
       }
     }
 
+    .userlistTitle {
+      border: 1px solid rgba(0, 0, 0, 0.25);
+      text-align: center;
+      font-size: 18px;
+      padding: 0.4rem;
+      border-right: none;
+      font-weight: bold;
+      color: rgb(12, 60, 71);
+    }
+
     .userList {
+      $borderProp: 1px solid rgba(0, 0, 0, 0.25);
+
       li {
         display: flex;
         align-items: center;
         padding: 0.4rem;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.25);
-        border-left: 1px solid rgba(0, 0, 0, 0.25);
+        border-bottom: $borderProp;
+        border-left: $borderProp;
         font-family: sans-serif;
 
         img {
@@ -111,10 +123,6 @@
         .userLink:hover {
           text-decoration: underline;
         }
-      }
-
-      li:nth-child(1) {
-        border-top: 1px solid rgba(0, 0, 0, 0.25);
       }
     }
   }

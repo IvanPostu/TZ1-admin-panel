@@ -1,9 +1,11 @@
 package com.webapp.handlers;
 
-import com.webapp.domain.dto.FindBotResultDto;
+import com.webapp.domain.dto.BotDto;
+import com.webapp.domain.dto.BotSubscribersDto;
 import com.webapp.domain.dto.FindBotsResultDto;
-import com.webapp.domain.dto.Views;
 import com.webapp.domain.entity.BotEntity;
+import com.webapp.domain.views.BotSubscribersDtoViews;
+import com.webapp.domain.views.FindBotsResultDtoViews;
 import com.webapp.service.BotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -11,12 +13,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.codec.json.Jackson2CodecSupport;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Mono;
 
 @Component
+@Transactional
 public class BotHandler {
 
   @Autowired
@@ -53,7 +57,7 @@ public class BotHandler {
 
     return ServerResponse
         .ok()
-        .hint(Jackson2CodecSupport.JSON_VIEW_HINT, Views.FindBotsDtoData.class)
+        .hint(Jackson2CodecSupport.JSON_VIEW_HINT, FindBotsResultDtoViews.FindBotsDtoData.class)
         .contentType(MediaType.APPLICATION_JSON)
         .body(data, FindBotsResultDto.class);
 
@@ -66,15 +70,15 @@ public class BotHandler {
       botId= request
           .queryParam("id")
           .map(Integer::parseInt)
-          .orElse(7);
+          .get();
     }catch(NumberFormatException e){
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Id is not valid!");
     }
 
-    Mono<FindBotResultDto> result = Mono
+    Mono<BotDto> result = Mono
         .just(botService.findById(botId))
         .map(a -> {
-          FindBotResultDto res = new FindBotResultDto();
+          BotDto res = new BotDto();
           BotEntity botFromDb = a.orElseThrow(() ->
               new ResponseStatusException(HttpStatus.NOT_FOUND, "Bot not found!")
           );
@@ -85,12 +89,42 @@ public class BotHandler {
 
           return res;
         });
-
     return ServerResponse
         .ok()
-        .body(result, FindBotResultDto.class);
+        .contentType(MediaType.APPLICATION_JSON)
+        .body(result, BotDto.class);
+  }
 
+  public Mono<ServerResponse> botSubscribers (ServerRequest request){
 
+    int botId;
+
+    try{
+      botId= request
+          .queryParam("id")
+          .map(Integer::parseInt)
+          .get();
+    }catch(NumberFormatException e){
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Id is not valid!");
+    }
+
+    try {
+      Mono<BotSubscribersDto> result = Mono
+          .just(botService.findSubscribersByBotId(botId))
+          .map( a -> {
+            BotSubscribersDto r = new BotSubscribersDto();
+            r.setSubscribers(a);
+            r.setBotId(botId);
+            return r;
+          });
+      return ServerResponse
+          .ok()
+          .hint(Jackson2CodecSupport.JSON_VIEW_HINT, BotSubscribersDtoViews.All.class)
+          .contentType(MediaType.APPLICATION_JSON)
+          .body(result, BotSubscribersDto.class);
+    } catch (Exception e) {
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Id is not valid!");
+    }
   }
 
 }

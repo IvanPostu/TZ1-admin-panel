@@ -1,7 +1,8 @@
 package com.webapp.domain.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.webapp.domain.views.BotEntityViews;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,15 +17,16 @@ import java.util.Set;
 @NoArgsConstructor
 @Getter
 @Setter
+@EqualsAndHashCode(of = {"id"})
 public class BotEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name="id", unique = true, nullable = false)
-  @JsonView(Views.IdName.class)
+  @JsonView(BotEntityViews.IdName.class)
   private Integer id;
 
-  @JsonView(Views.IdName.class)
+  @JsonView(BotEntityViews.IdName.class)
   private String name;
 
   @ManyToOne( fetch=FetchType.EAGER )
@@ -32,7 +34,7 @@ public class BotEntity {
   private BotCategoryEntity category;
 
   @Column(name = "avatar_filename")
-  @JsonView(Views.IconFilename.class)
+  @JsonView(BotEntityViews.IconFilename.class)
   private String avatarFilename;
 
   @ManyToMany

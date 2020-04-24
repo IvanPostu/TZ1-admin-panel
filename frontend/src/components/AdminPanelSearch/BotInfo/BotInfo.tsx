@@ -14,6 +14,9 @@ export const BotInfo: FunctionComponent = () => {
           </div>
 
           <div style={{ flexGrow: 4 }} className={style.rowItem}>
+            {true && <div className={style.userlistTitle}>Пользователи текущего бота</div>}
+            {/* {true && <div className={style.userlistTitle}>Укажите бота в поисковом запросе</div>} */}
+
             <BotUserList />
           </div>
         </div>

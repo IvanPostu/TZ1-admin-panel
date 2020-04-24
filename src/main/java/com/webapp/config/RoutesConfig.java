@@ -38,6 +38,11 @@ public class RoutesConfig {
             RequestPredicates.GET("/api/bot")
                 .and(RequestPredicates.accept(MediaType.APPLICATION_JSON)),
             botHandler::findBotById
+        )
+        .andRoute(
+            RequestPredicates.GET("/api/bot/subscribers")
+                .and(RequestPredicates.accept(MediaType.APPLICATION_JSON)),
+            botHandler::botSubscribers
         );
   }
 

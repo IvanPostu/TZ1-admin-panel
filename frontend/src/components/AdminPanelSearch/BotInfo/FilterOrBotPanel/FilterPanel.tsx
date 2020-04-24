@@ -15,14 +15,6 @@ const FilterPanel: FC = () => (
       <label style={{ flexGrow: 4 }}>Максимальный возраст</label>
       <input style={{ flexGrow: 2 }} className={style.ageInput} type="text" />
     </div>
-    <div>
-      <label style={{ flexGrow: 4 }}>Пол</label>
-      <select style={{ flexGrow: 2 }}>
-        <option value="unknown">Не указан</option>
-        <option value="female">Женский</option>
-        <option value="male">Мужской</option>
-      </select>
-    </div>
   </div>
 )
 

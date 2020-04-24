@@ -7,7 +7,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class FindBotResultDto {
+public class BotDto {
 
   private Integer id;
   private String name;
