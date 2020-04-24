@@ -1,4 +1,4 @@
-export enum botActionTypeConstants {
+export enum botsActionTypeConstants {
   FETCH_BOTS = '@Bots/FETCH_BOTS',
   FETCH_NEXT_PAGE = '@Bots/FETCH_NEXT_PAGE',
   LOADING_START = '@Bots/LOADING_START',
@@ -38,33 +38,33 @@ type UpdateBotsActionPayloadType = {
  * Action types BEGIN
  */
 export interface FetchBotsActionType {
-  type: typeof botActionTypeConstants.FETCH_BOTS
+  type: typeof botsActionTypeConstants.FETCH_BOTS
   payload: FetchBotsActionPayloadType
 }
 
 export interface FetchNextPageBotsActionType {
-  type: typeof botActionTypeConstants.FETCH_NEXT_PAGE
+  type: typeof botsActionTypeConstants.FETCH_NEXT_PAGE
 }
 
 export interface StartLoadingType {
-  type: typeof botActionTypeConstants.LOADING_START
+  type: typeof botsActionTypeConstants.LOADING_START
 }
 
 export interface StopLoadingType {
-  type: typeof botActionTypeConstants.LOADING_END
+  type: typeof botsActionTypeConstants.LOADING_END
 }
 
 export interface UpdateBotsActionType {
-  type: typeof botActionTypeConstants.UPDATE_BOTS
+  type: typeof botsActionTypeConstants.UPDATE_BOTS
   payload: UpdateBotsActionPayloadType
 }
 
 export interface ClearBotsActionType {
-  type: typeof botActionTypeConstants.CLEAR_BOTS
+  type: typeof botsActionTypeConstants.CLEAR_BOTS
 }
 
 export interface RequestErrorActionType {
-  type: typeof botActionTypeConstants.REQUEST_ERROR
+  type: typeof botsActionTypeConstants.REQUEST_ERROR
   payload: string
 }
 

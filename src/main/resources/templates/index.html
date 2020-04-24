@@ -6,15 +6,6 @@
   </head>
 
   <th:block th:with="isDebug=${@environment.getProperty('debug')}">
-    <!-- <body th:if="${isDebug}" th:replace="~{generated :: body-fragment }" /> -->
-
     <body th:replace="~{generated :: body-fragment }" />
-
-    <!-- <th:block th:if="${isDebug}">
-      <body>
-        <div id="root"></div>
-        <script th:src="'http://127.0.0.1:8000/main.js'"></script>
-      </body>
-    </th:block> -->
   </th:block>
 </html>

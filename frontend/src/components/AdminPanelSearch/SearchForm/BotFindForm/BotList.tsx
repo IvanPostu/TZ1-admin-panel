@@ -8,9 +8,16 @@ type LocalPropType = PropsWithChildren<{}> & {
   bots: Array<BotType>
   haveNextPage: boolean
   onSeeMoreClick: () => void
+  onBotInListClick: (id: number) => void
 }
 
-export const BotList: FC<LocalPropType> = ({ bots, isLoading, haveNextPage, onSeeMoreClick }) => {
+export const BotList: FC<LocalPropType> = ({
+  bots,
+  isLoading,
+  haveNextPage,
+  onSeeMoreClick,
+  onBotInListClick,
+}) => {
   return (
     <ul>
       {isLoading && (
@@ -21,7 +28,7 @@ export const BotList: FC<LocalPropType> = ({ bots, isLoading, haveNextPage, onSe
         </li>
       )}
       {bots.map((item) => (
-        <li key={item.id}>
+        <li onClick={() => onBotInListClick(item.id)} key={item.id}>
           <button>{item.name}</button>
         </li>
       ))}

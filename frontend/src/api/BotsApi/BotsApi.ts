@@ -2,8 +2,6 @@ import { url } from '@/api/url'
 
 /**
  *
- * @throws
- *
  * @RequestResult
  * {
  *    name: string
@@ -29,6 +27,23 @@ export async function fetchBots(name = '', currentPage = 0, botsPerPage = 8) {
 
   if (!result.ok) throw new Error('Request failed...')
 
+  const data = await result.json()
+  return data
+}
+
+export async function fetchBotById(id: number) {
+  const options: RequestInit = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }
+
+  const urlWithParams = new URL(url.href + 'api/bot')
+
+  urlWithParams.searchParams.append('id', String(id))
+  const result = await fetch(`${urlWithParams}`, options)
+  if (!result.ok) throw new Error('Request failed...')
   const data = await result.json()
   return data
 }

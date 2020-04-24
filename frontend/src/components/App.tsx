@@ -4,12 +4,12 @@ import { routes } from '@/routes/routes'
 import { Navbar } from '@/components/Navbar/index'
 import { Footer } from '@/components/Footer'
 import { ReduxWrapper } from '@/store/root'
-import { fetchBots } from '@/api/BotsApi'
+import { fetchBots, fetchBotById } from '@/api/BotsApi'
 
 export const App: React.FC = (): React.ReactElement => {
   // useEffect(() => {
-  //   const bots = fetchBots('ax')
-  //   console.log(bots)
+  //   const data = fetchBotById(1)
+  //   console.log(data)
   // }, [])
 
   return (

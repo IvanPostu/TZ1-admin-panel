@@ -1,6 +1,5 @@
 import React, { FC } from 'react'
 import style from './style.scss'
-import T from 'prop-types'
 
 type LoaderPropType = {
   size?: string

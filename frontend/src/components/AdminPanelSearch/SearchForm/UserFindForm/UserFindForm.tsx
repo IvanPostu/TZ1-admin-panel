@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useState } from 'react'
-import style from './style.scss'
-import { IoIosSearch, IoMdPeople } from 'react-icons/io'
+import style from '../style.scss'
+import { IoMdPeople } from 'react-icons/io'
 import { Loader } from '@/components/LoaderA/Loader'
 import { OutsideClickWrapper } from '@/components/OutsideClickWrapper'
 
@@ -19,9 +19,6 @@ export const UserFindForm: FunctionComponent = () => {
         <div className={style.tbox}>
           <div>
             <input onFocus={() => setResultIsShowed(true)} type="text" maxLength={50} />
-            <button>
-              <IoIosSearch />
-            </button>
           </div>
 
           {resultIsShowed && (

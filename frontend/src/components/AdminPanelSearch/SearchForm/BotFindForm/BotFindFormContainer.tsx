@@ -1,17 +1,18 @@
 import React, { FunctionComponent, useState, PropsWithChildren } from 'react'
 import style from '../style.scss'
-import { IoIosSearch, IoIosCog } from 'react-icons/io'
+import { IoIosCog } from 'react-icons/io'
 import { OutsideClickWrapper } from '@/components/OutsideClickWrapper'
 import { connect } from 'react-redux'
 import { bindActionCreators, Dispatch } from 'redux'
 import { fetchBots, fetchNextPageBots, startLoading, clearBots } from '@/store/Bots/actionCreators'
+import { fetchBot as fetchBotById } from '@/store/Bot/actionCreators'
 import { BotList } from '@/components/AdminPanelSearch/SearchForm/BotFindForm/BotList'
 import { GlobalStateType } from '@/store'
 import { BotsRootActionType } from '@/store/Bots/types'
 import debounce from '@/utils/debounceFunction'
 
 function mapDispatchToProps(dispatch: Dispatch<BotsRootActionType>) {
-  const actionCreators = { fetchBots, startLoading, clearBots, fetchNextPageBots }
+  const actionCreators = { fetchBots, startLoading, clearBots, fetchNextPageBots, fetchBotById }
   return bindActionCreators(actionCreators, dispatch)
 }
 
@@ -32,7 +33,7 @@ const BotFindForm: FunctionComponent<BotFindFormPropType> = (props) => {
   const refToSearchInput = React.useRef<HTMLInputElement>(null)
   const inputChangeWithDebounce = debounce((textInput: string) => {
     /**
-     * TODO: Дублирование кода с данными из input чтобы от асинхронной перерисовки
+     * Дублирование кода с данными из input чтобы от асинхронной перерисовки
      * не сбивался debounce.
      */
     if (refToSearchInput.current?.value === textInput) {
@@ -69,9 +70,6 @@ const BotFindForm: FunctionComponent<BotFindFormPropType> = (props) => {
               type="text"
               maxLength={50}
             />
-            <button>
-              <IoIosSearch />
-            </button>
           </div>
 
           {showBotListCondition && (
@@ -80,6 +78,7 @@ const BotFindForm: FunctionComponent<BotFindFormPropType> = (props) => {
               haveNextPage={props.haveNextPage}
               isLoading={props.isLoading}
               bots={props.bots}
+              onBotInListClick={props.fetchBotById}
             />
           )}
         </div>
@@ -88,4 +87,4 @@ const BotFindForm: FunctionComponent<BotFindFormPropType> = (props) => {
   )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(BotFindForm)
+export const BotFindFormContainer = connect(mapStateToProps, mapDispatchToProps)(BotFindForm)

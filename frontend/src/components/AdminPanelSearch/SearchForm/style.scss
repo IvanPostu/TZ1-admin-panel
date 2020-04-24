@@ -13,7 +13,7 @@ $searchInputHeight: 35px;
   position: relative;
   left: 50%;
   transform: translateX(-50%);
-  // border: 1px solid orange;
+  z-index: 1;
   flex-direction: row;
 
   @include mql(sm) {
@@ -79,15 +79,6 @@ $searchInputHeight: 35px;
           padding: 2px 0;
           font-size: 1.1rem;
           height: 26px;
-        }
-
-        button {
-          height: 31px;
-          background: $grayB;
-        }
-
-        button:hover {
-          background: $grayC;
         }
       }
     }

@@ -1,0 +1,3 @@
+GET http://127.0.0.1:8080/api/bot?id=2 HTTP/1.1
+content-type: application/json
+

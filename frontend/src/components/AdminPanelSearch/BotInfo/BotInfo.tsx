@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react'
 import style from './style.scss'
 import { BotUserList } from './BotUserList'
 
-import { FilterOrBotPanel } from './FilterOrBotPanel'
+import { FilterOrBotPanelContainer } from './FilterOrBotPanel/FilterOrBotPanelContainer'
 
 export const BotInfo: FunctionComponent = () => {
   return (
@@ -10,7 +10,7 @@ export const BotInfo: FunctionComponent = () => {
       <div className={style.box}>
         <div className={style.row}>
           <div style={{ flexGrow: 2 }} className={style.rowItem}>
-            <FilterOrBotPanel />
+            <FilterOrBotPanelContainer />
           </div>
 
           <div style={{ flexGrow: 4 }} className={style.rowItem}>

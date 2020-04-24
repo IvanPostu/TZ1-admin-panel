@@ -1,5 +1,5 @@
-import { botActionTypeConstants } from './types'
 import {
+  botsActionTypeConstants,
   BotType,
   FetchBotsActionType,
   FetchNextPageBotsActionType,
@@ -14,7 +14,7 @@ import {
  * This action creator is handled by saga
  */
 export const fetchBots = (name: string, page = 0, botsPerPage = 0): FetchBotsActionType => ({
-  type: botActionTypeConstants.FETCH_BOTS,
+  type: botsActionTypeConstants.FETCH_BOTS,
   payload: {
     name,
     page,
@@ -26,7 +26,7 @@ export const fetchBots = (name: string, page = 0, botsPerPage = 0): FetchBotsAct
  * This action creator is handled by saga
  */
 export const fetchNextPageBots = (): FetchNextPageBotsActionType => ({
-  type: botActionTypeConstants.FETCH_NEXT_PAGE,
+  type: botsActionTypeConstants.FETCH_NEXT_PAGE,
 })
 
 export const updateBots = (
@@ -35,7 +35,7 @@ export const updateBots = (
   haveNextPage: boolean,
   currentPage = 0,
 ): UpdateBotsActionType => ({
-  type: botActionTypeConstants.UPDATE_BOTS,
+  type: botsActionTypeConstants.UPDATE_BOTS,
   payload: {
     bots,
     haveNextPage,
@@ -45,18 +45,18 @@ export const updateBots = (
 })
 
 export const startLoading = (): StartLoadingType => ({
-  type: botActionTypeConstants.LOADING_START,
+  type: botsActionTypeConstants.LOADING_START,
 })
 
 export const stopLoading = (): StopLoadingType => ({
-  type: botActionTypeConstants.LOADING_END,
+  type: botsActionTypeConstants.LOADING_END,
 })
 
 export const clearBots = (): ClearBotsActionType => ({
-  type: botActionTypeConstants.CLEAR_BOTS,
+  type: botsActionTypeConstants.CLEAR_BOTS,
 })
 
 export const requestError = (errorMsg: string): RequestErrorActionType => ({
-  type: botActionTypeConstants.REQUEST_ERROR,
+  type: botsActionTypeConstants.REQUEST_ERROR,
   payload: errorMsg,
 })

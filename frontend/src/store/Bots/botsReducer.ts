@@ -1,4 +1,4 @@
-import { BotsRootActionType, BotType, botActionTypeConstants } from './types'
+import { BotsRootActionType, BotType, botsActionTypeConstants } from './types'
 import { Reducer } from 'redux'
 
 type BotsStateType = {
@@ -24,27 +24,28 @@ const botsReducer: Reducer<BotsStateType, BotsRootActionType> = (
   action,
 ): BotsStateType => {
   switch (action.type) {
-    case botActionTypeConstants.LOADING_START:
+    case botsActionTypeConstants.LOADING_START:
       return { ...state, isLoading: true }
-    case botActionTypeConstants.LOADING_END:
+    case botsActionTypeConstants.LOADING_END:
       return { ...state, isLoading: false }
-    case botActionTypeConstants.UPDATE_BOTS:
+    case botsActionTypeConstants.UPDATE_BOTS:
       return {
         ...state,
         ...action.payload,
         errorMessage: '',
       }
-    case botActionTypeConstants.CLEAR_BOTS:
+    case botsActionTypeConstants.CLEAR_BOTS:
       return {
         ...state,
         bots: [],
       }
-    case botActionTypeConstants.REQUEST_ERROR:
+    case botsActionTypeConstants.REQUEST_ERROR:
       return {
         ...state,
         errorMessage: action.payload,
       }
-
+    case botsActionTypeConstants.FETCH_BOTS: // handled by redux saga
+    case botsActionTypeConstants.FETCH_NEXT_PAGE: // handled by redux saga
     default:
       return state
   }

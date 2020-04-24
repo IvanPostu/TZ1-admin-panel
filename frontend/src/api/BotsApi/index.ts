@@ -1,1 +1,1 @@
-export { fetchBots } from './BotsApi'
+export * from './BotsApi'

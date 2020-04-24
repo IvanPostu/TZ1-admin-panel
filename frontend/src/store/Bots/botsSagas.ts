@@ -1,5 +1,5 @@
 import { takeEvery, put, call } from 'redux-saga/effects'
-import { botActionTypeConstants, FetchBotsActionType } from '@/store/Bots/types'
+import { botsActionTypeConstants, FetchBotsActionType } from '@/store/Bots/types'
 import { fetchBots } from '@/api/BotsApi'
 import { stopLoading, updateBots, requestError } from '@/store/Bots/actionCreators'
 import { store } from '@/store/root'
@@ -19,7 +19,7 @@ function* fetchBotsSagaWorker(action: FetchBotsActionType) {
 }
 
 export function* fetchBotsSagaWatcher() {
-  yield takeEvery(botActionTypeConstants.FETCH_BOTS, fetchBotsSagaWorker)
+  yield takeEvery(botsActionTypeConstants.FETCH_BOTS, fetchBotsSagaWorker)
 }
 
 function* fetchNextPageBotsSagaWorker() {
@@ -38,13 +38,12 @@ function* fetchNextPageBotsSagaWorker() {
         ),
       )
     }
-
-    // console.log(result)
   } catch (e) {
-    console.error(e)
+    const errorMessage = 'Ошибка...'
+    yield put(requestError(errorMessage))
   }
 }
 
 export function* fetchNextPageBotsSagaWatcher() {
-  yield takeEvery(botActionTypeConstants.FETCH_NEXT_PAGE, fetchNextPageBotsSagaWorker)
+  yield takeEvery(botsActionTypeConstants.FETCH_NEXT_PAGE, fetchNextPageBotsSagaWorker)
 }
