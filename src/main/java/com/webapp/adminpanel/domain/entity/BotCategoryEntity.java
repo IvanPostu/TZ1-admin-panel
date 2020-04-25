@@ -1,4 +1,5 @@
-package com.webapp.domain.entity;
+package com.webapp.adminpanel.domain.entity;
+
 
 
 import lombok.Getter;

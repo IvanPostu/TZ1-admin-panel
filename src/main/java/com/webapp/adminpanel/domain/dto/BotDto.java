@@ -1,4 +1,5 @@
-package com.webapp.domain.dto;
+package com.webapp.adminpanel.domain.dto;
+
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

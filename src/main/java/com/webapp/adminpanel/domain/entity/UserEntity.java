@@ -1,7 +1,8 @@
-package com.webapp.domain.entity;
+package com.webapp.adminpanel.domain.entity;
 
 import com.fasterxml.jackson.annotation.*;
-import com.webapp.domain.views.UserEntityViews;
+import com.webapp.adminpanel.domain.views.UserEntityViews;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

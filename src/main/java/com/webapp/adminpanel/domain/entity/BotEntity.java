@@ -1,7 +1,9 @@
-package com.webapp.domain.entity;
+package com.webapp.adminpanel.domain.entity;
+
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.webapp.domain.views.BotEntityViews;
+import com.webapp.adminpanel.domain.views.BotEntityViews;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

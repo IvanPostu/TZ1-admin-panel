@@ -1,4 +1,4 @@
-package com.webapp.handlers;
+package com.webapp.adminpanel.handlers;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;

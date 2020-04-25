@@ -3,7 +3,7 @@ debug: true
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost/app_db
+    url: jdbc:postgresql://127.0.0.1/app_db
     username: postgres
     password: qwerty
   jpa:

@@ -1,8 +1,10 @@
-package com.webapp.domain.dto;
+package com.webapp.adminpanel.domain.dto;
+
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.webapp.domain.entity.UserEntity;
-import com.webapp.domain.views.BotSubscribersDtoViews;
+import com.webapp.adminpanel.domain.entity.UserEntity;
+import com.webapp.adminpanel.domain.views.BotSubscribersDtoViews;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

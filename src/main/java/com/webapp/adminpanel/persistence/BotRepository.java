@@ -1,6 +1,6 @@
-package com.webapp.persistence;
+package com.webapp.adminpanel.persistence;
 
-import com.webapp.domain.entity.BotEntity;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
@@ -8,6 +8,8 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+
+import com.webapp.adminpanel.domain.entity.BotEntity;
 
 public interface BotRepository extends CrudRepository<BotEntity, Integer> {
 

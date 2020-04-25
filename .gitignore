@@ -1,39 +1,55 @@
-node_modules
-build
-
-
-!.mvn/wrapper/maven-wrapper.jar
-*.class
-*.jar
-target
-uploads
-pg_data
-*.log
-package-lock.json
-node_modules
-dist
-build
-src/main/resources/static
-src/main/resources/templates
-frontend_build
-frontend/libraries
-
-
 HELP.md
-.gradle
-build/
-!gradle/wrapper/gradle-wrapper.jar
+target/
+!.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**
 !**/src/test/**
 
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
 
 ### IntelliJ IDEA ###
 .idea
 *.iws
 *.iml
 *.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+
+
+node_modules
+
+
+*.class
+*.jar
+uploads
+pg_data
+*.log
+src/main/resources/static
+src/main/resources/templates
+frontend_build
+frontend/libraries
+
+
+.gradle
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**
+!**/src/test/**
+
 out/
 
 ### assembled frontend ###
 /src/main/resources/static
 /src/main/resources/templates/generated.html
+

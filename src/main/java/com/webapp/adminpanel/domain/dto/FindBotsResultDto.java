@@ -1,8 +1,10 @@
-package com.webapp.domain.dto;
+package com.webapp.adminpanel.domain.dto;
+
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.webapp.domain.entity.BotEntity;
-import com.webapp.domain.views.FindBotsResultDtoViews;
+import com.webapp.adminpanel.domain.entity.BotEntity;
+import com.webapp.adminpanel.domain.views.FindBotsResultDtoViews;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

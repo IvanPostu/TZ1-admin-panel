@@ -1,4 +1,4 @@
-package com.webapp.domain.views;
+package com.webapp.adminpanel.domain.views;
 
 public final class BotEntityViews {
 
