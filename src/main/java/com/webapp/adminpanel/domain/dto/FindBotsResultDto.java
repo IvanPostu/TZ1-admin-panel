@@ -1,30 +1,28 @@
 package com.webapp.adminpanel.domain.dto;
 
 
+import java.util.LinkedList;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonView;
 import com.webapp.adminpanel.domain.entity.BotEntity;
-import com.webapp.adminpanel.domain.views.FindBotsResultDtoViews;
+import com.webapp.adminpanel.domain.jsonviews.Views;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.LinkedList;
-import java.util.List;
 
 
 @NoArgsConstructor
 @Data
 public class FindBotsResultDto {
-  @JsonView(FindBotsResultDtoViews.FindBotsDtoData.class)
+
+  @JsonView(Views.FindBotsResultDtoViews.class)
   private String name;
-
-  @JsonView(FindBotsResultDtoViews.FindBotsDtoData.class)
+  @JsonView(Views.FindBotsResultDtoViews.class)
   private Integer currentPage;
-
-  @JsonView(FindBotsResultDtoViews.FindBotsDtoData.class)
+  @JsonView(Views.FindBotsResultDtoViews.class)
   private List<BotEntity> bots = new LinkedList<>();
-
-  @JsonView(FindBotsResultDtoViews.FindBotsDtoData.class)
+  @JsonView(Views.FindBotsResultDtoViews.class)
   private Boolean haveNextPage;
 
 }

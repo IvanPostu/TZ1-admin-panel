@@ -1,11 +1,10 @@
-import React from 'react'
+import React, { FC } from 'react'
 import style from './style.scss'
 
-export const Footer = () => {
+export const Footer: FC = () => {
   return (
     <footer id={style.footer}>
-      <div className={style.body}></div>
-      <div className={style.tail}>https://github.com/IvanPostu</div>
+      <div className={style.body}>https://github.com/IvanPostu</div>
     </footer>
   )
 }

@@ -2,28 +2,29 @@ package com.webapp.adminpanel.domain.entity;
 
 
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
-import java.util.List;
-
-@Entity
-@Table(name = "bot_category")
 @NoArgsConstructor
 @Getter
 @Setter
+@Table(value = "bot_category")
 public class BotCategoryEntity {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name="id", unique = true, nullable = false)
   private Integer id;
 
   private String name;
 
-  @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-  private List<BotEntity> bots;
+  // @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  
+  private List<BotEntity> bots = new ArrayList<>();
 
 }

@@ -17,7 +17,7 @@ export async function fetchBots(name = '', currentPage = 0, botsPerPage = 8) {
     },
   }
 
-  const urlWithParams = new URL(url.href + 'api/bots') //url +
+  const urlWithParams = new URL(url.href + 'api/botsApi/findByName') //url +
 
   urlWithParams.searchParams.append('current-page', String(currentPage))
   urlWithParams.searchParams.append('name', String(name))
@@ -39,7 +39,7 @@ export async function fetchBotById(id: number) {
     },
   }
 
-  const urlWithParams = new URL(url.href + 'api/bot')
+  const urlWithParams = new URL(url.href + 'api/botsApi/find')
 
   urlWithParams.searchParams.append('id', String(id))
   const result = await fetch(`${urlWithParams}`, options)

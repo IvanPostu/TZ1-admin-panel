@@ -1,23 +1,21 @@
 package com.webapp.adminpanel.domain.dto;
 
 
-import com.fasterxml.jackson.annotation.JsonView;
-import com.webapp.adminpanel.domain.entity.UserEntity;
-import com.webapp.adminpanel.domain.views.BotSubscribersDtoViews;
+import java.util.List;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Set;
-
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class BotSubscribersDto {
 
-  @JsonView(BotSubscribersDtoViews.All.class)
   private Integer botId;
+  private Boolean haveNext;
+  private Integer currentOffset;
 
-  @JsonView(BotSubscribersDtoViews.All.class)
-  private Set<UserEntity> subscribers;
+  private List<UserDtoMin> subscribers;
 
 }

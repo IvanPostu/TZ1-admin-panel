@@ -15,6 +15,15 @@ const FilterPanel: FC = () => (
       <label style={{ flexGrow: 4 }}>Максимальный возраст</label>
       <input style={{ flexGrow: 2 }} className={style.ageInput} type="text" />
     </div>
+    <div>
+      <button
+        onClick={() => {
+          confirm('Текущие список пользователей будет изменен !!!')
+        }}
+      >
+        Применть
+      </button>
+    </div>
   </div>
 )
 

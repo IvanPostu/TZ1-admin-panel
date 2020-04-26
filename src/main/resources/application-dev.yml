@@ -1,16 +1,29 @@
 
 debug: true
 
+
 spring:
-  datasource:
-    url: jdbc:postgresql://127.0.0.1/app_db
+  # datasource:
+  #   url: jdbc:postgresql://127.0.0.1/app_db
+  #   username: postgres
+  #   password: qwerty
+  # jpa:
+  #   generate-ddl: false
+  #   show-sql: false
+  #   hibernate:
+  #     ddl-auto: validate
+  r2dbc: 
+    url: r2dbc:postgresql://localhost:5432/app_db
     username: postgres
     password: qwerty
-  jpa:
-    generate-ddl: false
-    show-sql: false
-    hibernate:
-      ddl-auto: validate
-  server:
-    port: 8080
-  hostname: 127.0.0.1:${server.port}
+  flyway: 
+    url: jdbc:postgresql://localhost:5432/app_db
+    user: postgres
+    password: qwerty
+
+logging:
+  level:
+    org:
+      springframework:
+        data: 
+          r2dbc: DEBUG

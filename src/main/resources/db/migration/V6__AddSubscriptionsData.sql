@@ -31,13 +31,13 @@ BEGIN
         IF random_int_range(1,4) = 1 THEN
           IF (SELECT COUNT(1) FROM "bot" WHERE id=j) = 1 THEN
             bots_for_one_user := bots_for_one_user + 1;
-            INSERT INTO "user_subscriptions" (subscriber_id, bot_id) VALUES (i, j);
+            INSERT INTO "user_subscriptions" (user_id, bot_id) VALUES (i, j);
           END IF;
         END IF;
       END LOOP;
 
       IF (bots_for_one_user=0) THEN
-        INSERT INTO "user_subscriptions" (subscriber_id, bot_id) VALUES (i, default_bot_id);
+        INSERT INTO "user_subscriptions" (user_id, bot_id) VALUES (i, default_bot_id);
       END IF;
     END IF;
   END LOOP;

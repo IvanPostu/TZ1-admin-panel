@@ -15,6 +15,16 @@ export type BotType = {
   category: string
 }
 
+// export type SubscriberType = {
+//   page: number
+// }
+
+// export type UserType = {
+//   id: number
+//   avatarFilename: string
+//   fullname: string
+// }
+
 //state type
 export type BotStateType = BotType & {
   isLoading: boolean

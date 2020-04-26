@@ -67,6 +67,21 @@
         flex: 1 1 0;
       }
 
+      button{
+        background: $grayA;
+        width: 120px;
+        height: 45px; 
+        border: 1px solid $grayC;
+      }
+
+      button:hover{
+        border: 1px solid $grayD;
+      }
+
+      button:active{
+        background: $grayB;
+      }
+
       .ageInput {
         width: 45px;
       }

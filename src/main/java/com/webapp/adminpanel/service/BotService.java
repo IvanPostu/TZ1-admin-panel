@@ -1,41 +1,83 @@
 package com.webapp.adminpanel.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-
+import com.webapp.adminpanel.domain.dto.BotDto;
+import com.webapp.adminpanel.domain.dto.FindBotsResultDto;
 import com.webapp.adminpanel.domain.entity.BotEntity;
-import com.webapp.adminpanel.domain.entity.UserEntity;
+import com.webapp.adminpanel.persistence.BotCategoryRepository;
 import com.webapp.adminpanel.persistence.BotRepository;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
 @Service
-@Transactional
 public class BotService {
 
   @Autowired
   private BotRepository botRepository;
 
-  public List<BotEntity> findAll(){
+  @Autowired
+  private BotCategoryRepository categoryRepository;
+
+  public Flux<BotEntity> findAll(){
     return botRepository.findAll();
   }
 
-  public Page<BotEntity> findBotByNameSubstring(String botName, PageRequest pageRequest) {
-    return botRepository.findBotByNameSubstring(botName, pageRequest);
-  }
-
-  public Optional<BotEntity> findById(Integer id){
+  public Mono<BotEntity> findById(Integer id){
     return botRepository.findById(id);
   }
 
-  public Set<UserEntity> findSubscribersByBotId(int botId) throws Exception {
-    BotEntity bot = botRepository.findById(botId).orElseThrow(Exception::new);
-    Set<UserEntity> result = bot.getSubscribers();
+  public Mono<BotDto> findByIdWithCategory(Integer id){
+    Mono<BotDto> result = botRepository
+      .findById(id)
+      .flatMap(bot -> {
+        BotDto botDto = new BotDto();
+        botDto.setId(id);
+        botDto.setImageFilename(bot.getAvatarFilename());
+        botDto.setName(bot.getName());
+        if(bot.getCategoryId()!=null){
+          return categoryRepository.findById(bot.getCategoryId())
+          .map(categ -> {
+            botDto.setCategory(categ.getName());
+            return botDto;
+          });
+        }else{
+          return Mono.just(botDto);
+        }
+      });
+
+
     return result;
   }
+
+
+  public Mono<FindBotsResultDto> findBotsByNameSubString(
+    String nameSubString, 
+    int offset, 
+    int botsQuantity
+  ){
+
+    Flux<BotEntity> bots = botRepository
+      .findBotsByNameSubString(nameSubString, offset, botsQuantity+1);
+
+    Mono<FindBotsResultDto> result = bots
+      .collectList()
+      .map( list -> {
+        boolean haveNextPage = list.size()==botsQuantity+1;
+        if(haveNextPage){
+          list.remove(list.size()-1);
+        }
+
+        FindBotsResultDto dtoResult = new FindBotsResultDto();
+        dtoResult.setBots(list);
+        dtoResult.setCurrentPage(offset+botsQuantity);
+        dtoResult.setHaveNextPage(haveNextPage);
+        dtoResult.setName(nameSubString);
+        return dtoResult;
+      });
+    return result;
+  }
+
 }

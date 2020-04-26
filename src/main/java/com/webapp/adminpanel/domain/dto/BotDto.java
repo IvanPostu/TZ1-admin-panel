@@ -11,8 +11,8 @@ import lombok.Setter;
 public class BotDto {
 
   private Integer id;
-  private String name;
-  private String imageFilename;
-  private String category;
+  private String  name;
+  private String  imageFilename;
+  private String  category;
 
 }

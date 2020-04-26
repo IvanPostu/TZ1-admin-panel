@@ -1,24 +1,20 @@
 package com.webapp.adminpanel.persistence;
 
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.query.Param;
-
-import java.util.List;
-
 import com.webapp.adminpanel.domain.entity.BotEntity;
 
-public interface BotRepository extends CrudRepository<BotEntity, Integer> {
+import org.springframework.data.r2dbc.repository.Query;
+import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 
-  List<BotEntity> findAll();
+import reactor.core.publisher.Flux;
 
-  @Query("" +
-      "SELECT b FROM BotEntity b WHERE LOWER(b.name) LIKE CONCAT('%',LOWER(:name),'%') " +
-      "")
-  Page<BotEntity> findBotByNameSubstring(@Param("name") String name, Pageable pageable);
 
+public interface BotRepository extends ReactiveCrudRepository<BotEntity, Integer>{
+
+
+  @Query(value = ""
+  +"SELECT * FROM bot WHERE name LIKE CONCAT('%',:partialName,'%') "
+  +"OFFSET :offset LIMIT :limit")
+  public Flux<BotEntity> findBotsByNameSubString(String partialName, int offset, int limit);
 
 }

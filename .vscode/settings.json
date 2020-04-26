@@ -1,7 +1,8 @@
 {
   "eslint.workingDirectories": ["./frontend", "./worker", "./crawler"],
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
+    "source.fixAll.eslint": true,
+    // "source.organizeImports": true
   },
   "path-intellisense.mappings": {
     "@": "${workspaceRoot}/frontend/src"
@@ -22,16 +23,14 @@
   "editor.wordWrap": "wordWrapColumn",
   "editor.wrappingIndent": "same",
   "editor.wordWrapColumn": 100,
-  "editor.formatOnSave": true,
+  "editor.formatOnSave": false,
   "breadcrumbs.enabled": true,
   "terminal.integrated.fontFamily": "Fira Code Medium",
   "terminal.integrated.fontSize": 10,
-  "debug.console.wordWrap": true,
-  "debug.toolBarLocation": "floating",
   "editor.codeLens": false,
   "editor.cursorBlinking": "smooth",
   "editor.cursorStyle": "line",
-  "editor.fontSize": 12,
+  "editor.fontSize": 14,
   "editor.fontFamily": "Fira Code Medium",
   "editor.fontLigatures": true,
   "editor.formatOnPaste": false,
@@ -71,6 +70,5 @@
         }
       }
     ]
-  },
-
+  }
 }
