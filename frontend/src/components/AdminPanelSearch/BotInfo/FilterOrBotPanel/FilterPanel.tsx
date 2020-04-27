@@ -1,6 +1,6 @@
 import React, { FC, useRef } from 'react'
 import style from '../style.scss'
-import { SearchSubscribersFilterType } from '@/store/Bot/types'
+import { SearchSubscribersFilterType } from '@/store/BotSubscribers/types'
 
 type FilterPanelPropType = {
   changeFilter: (filter: SearchSubscribersFilterType) => void

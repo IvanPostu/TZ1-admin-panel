@@ -3,20 +3,28 @@ export enum botSubscribersActionTypeConstants {
   LOADING_START = '@BotSubscribers/LOADING_START',
   LOADING_END = '@BotSubscribers/LOADING_END',
   REQUEST_ERROR = '@BotSubscribers/REQUEST_ERROR',
+  CHANGE_FILTER = '@BotSubscribers/CHANGE_FILTER',
+}
+
+export type SearchSubscribersFilterType = {
+  sortSubscriberNameAlphabetical: boolean
+  subscriberMinAge: number
+  subscriberMaxAge: number
 }
 
 export type SubscriberType = {
-  readonly id: number
-  readonly fullname: string
-  readonly avatarFilename: string
-  readonly age: number
+  id: number
+  fullname: string
+  avatarFilename: string
+  age: number
 }
 
 export type BotSubscribersStateType = {
-  readonly totalPages: number
-  readonly usersPerPage: number
+  totalPages: number
+  usersPerPage: number
   botIsSelected: boolean
   pages: Map<number, Array<SubscriberType>>
+  searchFilter: SearchSubscribersFilterType
 }
 
 /**
@@ -27,7 +35,12 @@ export interface FetchPageActionType {
   payload: number
 }
 
-export type BotSubscribersRootActionType = FetchPageActionType
+export interface ChangeFilterActionType {
+  type: typeof botSubscribersActionTypeConstants.CHANGE_FILTER
+  payload: SearchSubscribersFilterType
+}
+
+export type BotSubscribersRootActionType = FetchPageActionType | ChangeFilterActionType
 
 /**
  * Action types END

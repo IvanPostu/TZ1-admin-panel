@@ -3,6 +3,7 @@ package com.webapp.adminpanel.service;
 import java.util.Date;
 
 import com.webapp.adminpanel.domain.dto.BotSubscribersDto;
+import com.webapp.adminpanel.domain.dto.BotSubscribersPaginationDto;
 import com.webapp.adminpanel.domain.dto.UserDtoMin;
 import com.webapp.adminpanel.persistence.UserRepository;
 import com.webapp.adminpanel.util.DateUtils;
@@ -58,6 +59,23 @@ public class UserService {
         
         return new BotSubscribersDto(botId, haveNextBots, page+1, list);
       });
+
+    return result;
+  }
+
+  public Mono<BotSubscribersPaginationDto> botSubscribersPagination(
+    int botId, 
+    int minUserAge, 
+    int maxUserAge, 
+    int usersPerPage
+  ){
+    
+    Mono<BotSubscribersPaginationDto> result = userRepository
+    .subscribersCountForBot(botId, minUserAge, maxUserAge)
+    .map( count -> {
+      int pageCount = count / usersPerPage + (count % usersPerPage == 0 ? 0 : 1);
+      return new BotSubscribersPaginationDto(botId, pageCount);
+    });
 
     return result;
   }

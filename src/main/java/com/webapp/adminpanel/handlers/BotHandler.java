@@ -2,6 +2,7 @@ package com.webapp.adminpanel.handlers;
 
 import com.webapp.adminpanel.domain.dto.BotDto;
 import com.webapp.adminpanel.domain.dto.BotSubscribersDto;
+import com.webapp.adminpanel.domain.dto.BotSubscribersPaginationDto;
 import com.webapp.adminpanel.domain.dto.FindBotsResultDto;
 import com.webapp.adminpanel.domain.jsonviews.Views;
 import com.webapp.adminpanel.service.BotService;
@@ -21,11 +22,14 @@ import reactor.core.publisher.Mono;
 @Component
 public class BotHandler {
 
-  @Autowired
-  private BotService botService;
+  private final BotService botService;
+  private final UserService userService;
 
   @Autowired
-  private UserService userService;
+  public BotHandler(BotService botService, UserService userService){
+    this.botService = botService;
+    this.userService = userService;
+  }
 
   public Mono<ServerResponse> findBotsByName(ServerRequest request) {
     final String botName = request.queryParam("name").orElse("");
@@ -125,6 +129,61 @@ public class BotHandler {
       .ok()
       .contentType(MediaType.APPLICATION_JSON)
       .body(result, BotSubscribersDto.class);
+  }
+
+  /**
+   * 
+   * This method is needed for the frontend to show 
+   * the total number of pages with bot subscribers,
+   * given the filter.
+   * 
+   * @param minUserAge, default 0
+   * @param maxUserAge, default 200
+   * @param usersPerPage, required
+   * @param botId; required
+   * @return Mono<BotSubscribersPaginationDto>;
+   */
+  public Mono<ServerResponse> botSubscribersPagination(ServerRequest request){
+
+    int minUserAge, maxUserAge, botId, usersPerPage;
+
+    try{
+
+      botId = request
+        .queryParam("botId")
+        .map(s -> Integer.parseInt(s))
+        .orElseThrow(() -> new ResponseStatusException(
+          HttpStatus.BAD_REQUEST, "botId argument is required")
+        );
+
+      minUserAge = request
+        .queryParam("minUserAge")
+        .map( s -> Integer.parseInt(s))
+        .orElse(0);
+
+      maxUserAge = request
+        .queryParam("maxUserAge")
+        .map( s -> Integer.parseInt(s))
+        .orElse(200);
+
+      usersPerPage = request
+        .queryParam("usersPerPage")
+        .map( s -> Integer.parseInt(s))
+        .orElseThrow(() -> new ResponseStatusException(
+          HttpStatus.BAD_REQUEST, "usersPerPage argument is required")
+        );
+
+    }catch(Exception e){
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Request params not valid!");
+    }
+
+    Mono<BotSubscribersPaginationDto> result = userService
+      .botSubscribersPagination( botId, minUserAge, maxUserAge, usersPerPage);
+
+    return ServerResponse
+      .ok()
+      .contentType(MediaType.APPLICATION_JSON)
+      .body(result, BotSubscribersPaginationDto.class);
   }
 
 }

@@ -6,10 +6,9 @@ import { GlobalStateType } from '@/store'
 import { connect } from 'react-redux'
 import { BotPanelPropType } from './BotPanel'
 import { bindActionCreators, Dispatch } from 'redux'
-import { BotRootActionType } from '@/store/Bot/types'
-import { changeFilter } from '@/store/Bot/actionCreators'
+import { changeFilter } from '@/store/BotSubscribers/actionCreators'
 
-function mapDispatchToProps(dispatch: Dispatch<BotRootActionType>) {
+function mapDispatchToProps(dispatch: Dispatch) {
   return bindActionCreators({ changeFilter }, dispatch)
 }
 

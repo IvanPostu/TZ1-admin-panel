@@ -24,12 +24,19 @@ public class RoutesConfig {
   public RouterFunction<ServerResponse> route(BotHandler botHandler) {
 
     return RouterFunctions
+    
       .route(RequestPredicates.GET("/api/botsApi/findByName")
         .and(RequestPredicates.accept(MediaType.APPLICATION_JSON)), botHandler::findBotsByName)
+
       .andRoute(RequestPredicates.GET("/api/botsApi/find")
         .and(RequestPredicates.accept(MediaType.APPLICATION_JSON)), botHandler::findBotById)
+
       .andRoute(RequestPredicates.GET("api/botsApi/findSubscribers")
-        .and(RequestPredicates.accept(MediaType.APPLICATION_JSON)), botHandler::botSubscribers);
+        .and(RequestPredicates.accept(MediaType.APPLICATION_JSON)), botHandler::botSubscribers)
+
+      .andRoute(RequestPredicates.GET("api/botsApi/usersPagination")
+        .and(RequestPredicates.accept(MediaType.APPLICATION_JSON)), 
+          botHandler::botSubscribersPagination);
   }
 
 }

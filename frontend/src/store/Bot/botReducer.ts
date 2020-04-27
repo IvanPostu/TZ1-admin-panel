@@ -9,11 +9,6 @@ const initialState: BotStateType = {
   errorMessage: '',
   category: '',
   subscribersCount: 0,
-  searchFilter: {
-    sortSubscriberNameAlphabetical: false,
-    subscriberMinAge: 0,
-    subscriberMaxAge: 200,
-  },
 }
 
 const botReducer: Reducer<BotStateType, BotRootActionType> = (
@@ -41,11 +36,7 @@ const botReducer: Reducer<BotStateType, BotRootActionType> = (
         ...state,
         errorMessage: action.payload,
       }
-    case T.CHANGE_FILTER:
-      return {
-        ...state,
-        searchFilter: action.payload,
-      }
+
     case T.FETCH_BOT: //handled by saga
     default:
       return state
