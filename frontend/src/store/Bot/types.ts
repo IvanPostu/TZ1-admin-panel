@@ -6,6 +6,13 @@ export enum botActionTypeConstants {
   LOADING_END = '@Bot/LOADING_END',
   UPDATE_BOT = '@Bot/UPDATE_BOT',
   REQUEST_ERROR = '@Bot/REQUEST_ERROR',
+  CHANGE_FILTER = '@Bot/CHANGE_FILTER',
+}
+
+export type SearchSubscribersFilterType = {
+  sortSubscriberNameAlphabetical: boolean
+  subscriberMinAge: number
+  subscriberMaxAge: number
 }
 
 export type BotType = {
@@ -15,20 +22,12 @@ export type BotType = {
   category: string
 }
 
-// export type SubscriberType = {
-//   page: number
-// }
-
-// export type UserType = {
-//   id: number
-//   avatarFilename: string
-//   fullname: string
-// }
-
 //state type
 export type BotStateType = BotType & {
+  subscribersCount: number
   isLoading: boolean
   errorMessage: string
+  searchFilter: SearchSubscribersFilterType
 }
 
 /**
@@ -57,12 +56,18 @@ export interface RequestErrorActionType {
   payload: string
 }
 
+export interface ChangeFilterActionType {
+  type: typeof botActionTypeConstants.CHANGE_FILTER
+  payload: SearchSubscribersFilterType
+}
+
 export type BotRootActionType =
   | FetchBotActionType
   | StartLoadingType
   | StopLoadingType
   | UpdateBotActionType
   | RequestErrorActionType
+  | ChangeFilterActionType
 
 /**
  * Action types END

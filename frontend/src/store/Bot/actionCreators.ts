@@ -22,3 +22,8 @@ export const requestError = (errorMessage: string): T.RequestErrorActionType => 
   type: T.botActionTypeConstants.REQUEST_ERROR,
   payload: errorMessage,
 })
+
+export const changeFilter = (filter: T.SearchSubscribersFilterType): T.ChangeFilterActionType => ({
+  type: T.botActionTypeConstants.CHANGE_FILTER,
+  payload: filter,
+})

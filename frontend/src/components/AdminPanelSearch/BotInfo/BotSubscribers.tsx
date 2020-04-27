@@ -1,10 +1,10 @@
 import React, { FunctionComponent } from 'react'
 import style from './style.scss'
-import { BotUserList } from './BotUserList'
+import { BotUserListContainer } from './BotUserListContainer'
 
 import { FilterOrBotPanelContainer } from './FilterOrBotPanel/FilterOrBotPanelContainer'
 
-export const BotInfo: FunctionComponent = () => {
+export const BotSubscribers: FunctionComponent = () => {
   return (
     <div className={style.container}>
       <div className={style.box}>
@@ -14,10 +14,7 @@ export const BotInfo: FunctionComponent = () => {
           </div>
 
           <div style={{ flexGrow: 4 }} className={style.rowItem}>
-            {true && <div className={style.userlistTitle}>Пользователи текущего бота</div>}
-            {/* {true && <div className={style.userlistTitle}>Укажите бота в поисковом запросе</div>} */}
-
-            <BotUserList />
+            <BotUserListContainer />
           </div>
         </div>
       </div>

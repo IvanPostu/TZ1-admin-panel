@@ -9,8 +9,6 @@
   $borderProp: 1px solid $grayA;
 
   button {
-
-
     color: rgb(5, 68, 87);
     padding: 8px 12px;
     transition: background-color .3s;
@@ -23,6 +21,10 @@
       padding: 6px 8px;
     }
 
+  }
+
+  .active{
+    background: $grayB;
   }
 
   button:hover {

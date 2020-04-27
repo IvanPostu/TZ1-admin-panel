@@ -5,6 +5,13 @@ import { FilterPanel } from './FilterPanel'
 import { GlobalStateType } from '@/store'
 import { connect } from 'react-redux'
 import { BotPanelPropType } from './BotPanel'
+import { bindActionCreators, Dispatch } from 'redux'
+import { BotRootActionType } from '@/store/Bot/types'
+import { changeFilter } from '@/store/Bot/actionCreators'
+
+function mapDispatchToProps(dispatch: Dispatch<BotRootActionType>) {
+  return bindActionCreators({ changeFilter }, dispatch)
+}
 
 function mapStateToProps(state: GlobalStateType) {
   return {
@@ -33,7 +40,9 @@ const MenuButton: FC<MenuButtonPropType> = ({ onClickHandler, isSelected, name }
   </button>
 )
 
-type FilterOrBotPanelPropType = PropsWithChildren<{}> & ReturnType<typeof mapStateToProps>
+type FilterOrBotPanelPropType = PropsWithChildren<{}> &
+  ReturnType<typeof mapStateToProps> &
+  ReturnType<typeof mapDispatchToProps>
 
 const FilterOrBotPanel: FC<FilterOrBotPanelPropType> = ({
   botAvatarFilename,
@@ -41,6 +50,7 @@ const FilterOrBotPanel: FC<FilterOrBotPanelPropType> = ({
   botId,
   botName,
   botCategory,
+  changeFilter,
 }) => {
   const [panelType, setPanelType] = useState<FilterPanelType>('botBenu')
   const propsForBotPanel: BotPanelPropType = {
@@ -66,9 +76,12 @@ const FilterOrBotPanel: FC<FilterOrBotPanelPropType> = ({
       />
 
       {panelType === 'botBenu' && <BotPanel {...propsForBotPanel} />}
-      {panelType === 'filter' && <FilterPanel />}
+      {panelType === 'filter' && <FilterPanel changeFilter={changeFilter} />}
     </Fragment>
   )
 }
 
-export const FilterOrBotPanelContainer = connect(mapStateToProps)(FilterOrBotPanel)
+export const FilterOrBotPanelContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(FilterOrBotPanel)

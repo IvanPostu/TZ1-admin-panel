@@ -1,12 +1,12 @@
 import React, { FC, Fragment } from 'react'
 import { AdminPanelSearch } from '@/components/AdminPanelSearch/SearchForm/AdminPanelSearch'
-import { BotInfo } from '@/components/AdminPanelSearch/BotInfo/BotInfo'
+import { BotSubscribers } from '@/components/AdminPanelSearch/BotInfo/BotSubscribers'
 
 export const AdminPanel: FC = () => {
   return (
     <Fragment>
       <AdminPanelSearch />
-      <BotInfo />
+      <BotSubscribers />
     </Fragment>
   )
 }
