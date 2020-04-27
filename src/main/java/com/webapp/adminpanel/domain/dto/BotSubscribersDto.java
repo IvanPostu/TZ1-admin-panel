@@ -14,7 +14,7 @@ public class BotSubscribersDto {
 
   private Integer botId;
   private Boolean haveNext;
-  private Integer currentOffset;
+  private Integer currentPage;
 
   private List<UserDtoMin> subscribers;
 

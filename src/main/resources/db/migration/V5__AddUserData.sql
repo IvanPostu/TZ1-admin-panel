@@ -42,7 +42,7 @@ BEGIN
     VALUES
     (
       DEFAULT, 
-      CAST(CONCAT(CAST( random_int_range(2000,2020) AS varchar(10)) , '-',
+      CAST(CONCAT(CAST( random_int_range(1970,2010) AS varchar(10)) , '-',
         CAST( random_int_range(1,12) AS varchar(10)),'-',
         CAST( random_int_range(1,27) AS varchar(10)))AS DATE ),
       CONCAT(random_string(random_int_range(7,22)), '@mail.com'),

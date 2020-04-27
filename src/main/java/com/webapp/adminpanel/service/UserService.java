@@ -1,8 +1,11 @@
 package com.webapp.adminpanel.service;
 
+import java.util.Date;
+
 import com.webapp.adminpanel.domain.dto.BotSubscribersDto;
 import com.webapp.adminpanel.domain.dto.UserDtoMin;
 import com.webapp.adminpanel.persistence.UserRepository;
+import com.webapp.adminpanel.util.DateUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,31 +23,30 @@ public class UserService {
     Integer botId, 
     int page, 
     int itemsPerPage, 
-    boolean sortUsernameAlphabetical)
+    boolean sortUsernameAlphabetical,
+    int minUserAge, 
+    int maxUserAge)
   {
 
     /**
      * Pulls out 1 more, to check if there is the next bot list,
      * after check remove last element if exists.
      */
-    Flux<UserDtoMin> users; 
 
     int offset = page * itemsPerPage;
-    int limit = itemsPerPage;
-    
-    if(sortUsernameAlphabetical){
-      users = userRepository
-      .findUsersByBotIdSortFirstname(botId, offset, limit+1)
-      .map( u -> new UserDtoMin(
-        u.getId(), u.getFirstname()+' '+u.getLastname(), u.getAvatarFilename())
+    int limit = itemsPerPage; 
+
+    Flux<UserDtoMin> users = userRepository
+      .findUsersByBotId(botId, offset, limit+1, sortUsernameAlphabetical, minUserAge, maxUserAge)
+      .map( u -> {
+        String fullname = u.getFirstname()+' '+u.getLastname();
+        int userYears = (int)DateUtils.getDiffYears(new Date(), u.getBirthDate());
+
+        return new UserDtoMin(
+          u.getId(), fullname, u.getAvatarFilename(), userYears
+        );
+      }
       );
-    }else {
-      users = userRepository
-      .findUsersByBotId(botId, offset, limit+1)
-      .map( u -> new UserDtoMin(
-        u.getId(), u.getFirstname()+' '+u.getLastname(), u.getAvatarFilename())
-      );
-    }
 
     Mono<BotSubscribersDto> result = users
       .collectList()
@@ -54,7 +56,7 @@ public class UserService {
           list.remove(list.size()-1);
         }
         
-        return new BotSubscribersDto(botId, haveNextBots, offset+list.size(), list);
+        return new BotSubscribersDto(botId, haveNextBots, page+1, list);
       });
 
     return result;

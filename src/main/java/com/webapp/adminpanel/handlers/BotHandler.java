@@ -76,6 +76,7 @@ public class BotHandler {
     int botId;
     int page;
     int itemsPerPage;
+    int minUserAge, maxUserAge;
     boolean sortUsernameAlphabetical;
 
     try {
@@ -99,12 +100,26 @@ public class BotHandler {
         .map(s -> Boolean.valueOf(s))
         .orElse(false);
 
-    } catch (NumberFormatException e) {
+      minUserAge = request
+        .queryParam("minUserAge")
+        .map( s -> Integer.parseInt(s))
+        .orElse(0);
+
+      maxUserAge = request
+        .queryParam("maxUserAge")
+        .map( s -> Integer.parseInt(s))
+        .orElse(200);
+
+      if(minUserAge > maxUserAge) throw new Exception();
+
+    } catch (Exception e) {
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Request params not valid!");
     }
 
     Mono<BotSubscribersDto> result = userService
-      .findSubscribersForBot(botId, page, itemsPerPage, sortUsernameAlphabetical);
+      .findSubscribersForBot(
+        botId, page, itemsPerPage, sortUsernameAlphabetical, minUserAge, maxUserAge
+      );
 
     return ServerResponse
       .ok()
