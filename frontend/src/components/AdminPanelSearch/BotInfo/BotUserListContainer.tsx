@@ -39,6 +39,7 @@ class BotUserList extends Component<BotUserListPropType, BotUserListStateType> {
     if (prevProps.botId !== this.props.botId) {
       this.setState({ currentPage: 1 })
     }
+    console.log(this.props.totalPages)
   }
 
   clickToPageHandler = (page: number) => {
@@ -48,11 +49,18 @@ class BotUserList extends Component<BotUserListPropType, BotUserListStateType> {
 
   render() {
     const subscriberList = this.props.pages.get(this.state.currentPage)
+    const listIsLoaded = this.props.pages.has(this.state.currentPage)
+    const botIsSelected = this.props.botId !== null
 
-    if (this.props.botId === null)
+    return (
+      <Pagination clickToPageHandler={this.clickToPageHandler} currentPage={10} totalPages={10} />
+    )
+
+    if (!botIsSelected) {
       return <div className={style.userlistTitle}>Укажите бота в поисковом запросе</div>
+    }
 
-    if (this.props.botId !== null && !subscriberList)
+    if (botIsSelected && !listIsLoaded) {
       return (
         <Fragment>
           <div className={style.userlistTitle}>Загрузка страницы...</div>
@@ -65,6 +73,7 @@ class BotUserList extends Component<BotUserListPropType, BotUserListStateType> {
           </ul>
         </Fragment>
       )
+    }
 
     return (
       <Fragment>
@@ -79,11 +88,11 @@ class BotUserList extends Component<BotUserListPropType, BotUserListStateType> {
             </li>
           ))}
         </ul>
-        <Pagination
+        {/* <Pagination
           clickToPageHandler={this.clickToPageHandler}
           currentPage={this.state.currentPage}
           totalPages={this.props.totalPages}
-        />
+        /> */}
       </Fragment>
     )
   }

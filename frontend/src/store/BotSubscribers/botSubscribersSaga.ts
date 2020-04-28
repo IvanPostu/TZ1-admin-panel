@@ -8,6 +8,7 @@ import {
   requestError,
   setPagesCount,
   clearPages,
+  fetchPage,
 } from '@/store/BotSubscribers/actionCreators'
 import {
   botSubscribersActionTypeConstants,
@@ -38,10 +39,15 @@ function* selectBotSubscribersSagaWorker(action: UpdateBotActionType) {
       maxUserAge,
     })
     const botSubscribers = result.firstPage.subscribers
+    // console.log(botSubscribers)
+
     avatarSetter(botSubscribers)
     yield put(clearPages())
-    yield put(addPage(1, botSubscribers))
     yield put(setPagesCount(result.pageCount))
+    // yield put(fetchPage(0))
+    yield put(addPage(1, botSubscribers))
+
+    // console.log(1)
   } catch (e) {
     const errorMessage = 'Ошибка...'
     yield put(requestError(errorMessage))

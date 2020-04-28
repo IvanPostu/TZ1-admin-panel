@@ -11,9 +11,9 @@ const initialState: BotSubscribersStateType = {
   pages: new Map<number, Array<SubscriberType>>(),
   usersPerPage: 10,
   searchFilter: {
-    sortSubscriberNameAlphabetical: false,
-    subscriberMinAge: 0,
-    subscriberMaxAge: 200,
+    sortSubscriberNameAlphabetical: true,
+    subscriberMinAge: 30,
+    subscriberMaxAge: 40,
   },
   errorMessage: '',
 }
@@ -26,12 +26,11 @@ const botSubscribersReducer: Reducer<BotSubscribersStateType, BotSubscribersRoot
     case T.CHANGE_FILTER:
       return {
         ...state,
-        pages: new Map(),
         searchFilter: action.payload,
       }
     case T.ADD_PAGE:
-      state.pages.set(action.payload.pageIndex, action.payload.page)
       const newMap = new Map(state.pages)
+      newMap.set(action.payload.pageIndex, action.payload.page)
       return {
         ...state,
         pages: newMap,
