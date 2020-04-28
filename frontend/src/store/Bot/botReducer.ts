@@ -4,7 +4,7 @@ import { Reducer } from 'redux'
 const initialState: BotStateType = {
   name: '-',
   imageFilename: 'no-robot-image',
-  id: 0,
+  id: null,
   isLoading: false,
   errorMessage: '',
   category: '',

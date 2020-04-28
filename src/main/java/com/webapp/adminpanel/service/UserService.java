@@ -29,16 +29,11 @@ public class UserService {
     int maxUserAge)
   {
 
-    /**
-     * Pulls out 1 more, to check if there is the next bot list,
-     * after check remove last element if exists.
-     */
-
     int offset = page * itemsPerPage;
     int limit = itemsPerPage; 
 
     Flux<UserDtoMin> users = userRepository
-      .findUsersByBotId(botId, offset, limit+1, sortUsernameAlphabetical, minUserAge, maxUserAge)
+      .findUsersByBotId(botId, offset, limit, sortUsernameAlphabetical, minUserAge, maxUserAge)
       .map( u -> {
         String fullname = u.getFirstname()+' '+u.getLastname();
         int userYears = (int)DateUtils.getDiffYears(new Date(), u.getBirthDate());
@@ -57,7 +52,7 @@ public class UserService {
           list.remove(list.size()-1);
         }
         
-        return new BotSubscribersDto(botId, haveNextBots, page+1, list);
+        return new BotSubscribersDto(botId, page+1, list);
       });
 
     return result;
@@ -67,15 +62,20 @@ public class UserService {
     int botId, 
     int minUserAge, 
     int maxUserAge, 
-    int usersPerPage
+    int usersPerPage,
+    boolean sortUsernameAlphabetical
   ){
     
     Mono<BotSubscribersPaginationDto> result = userRepository
-    .subscribersCountForBot(botId, minUserAge, maxUserAge)
-    .map( count -> {
-      int pageCount = count / usersPerPage + (count % usersPerPage == 0 ? 0 : 1);
-      return new BotSubscribersPaginationDto(botId, pageCount);
-    });
+      .subscribersCountForBot(botId, minUserAge, maxUserAge)
+      .flatMap( count -> {
+        int pageCount = count / usersPerPage + (count % usersPerPage == 0 ? 0 : 1);
+        return this
+          .findSubscribersForBot(
+            botId, 0, usersPerPage, sortUsernameAlphabetical, minUserAge, maxUserAge
+          )
+          .map( a -> new BotSubscribersPaginationDto(botId, pageCount, a));
+      });
 
     return result;
   }

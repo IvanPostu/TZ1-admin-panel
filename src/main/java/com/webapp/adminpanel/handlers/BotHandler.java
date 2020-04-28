@@ -79,7 +79,7 @@ public class BotHandler {
 
     int botId;
     int page;
-    int itemsPerPage;
+    int usersPerPage;
     int minUserAge, maxUserAge;
     boolean sortUsernameAlphabetical;
 
@@ -94,8 +94,8 @@ public class BotHandler {
         .map( s -> Integer.parseInt(s))
         .orElseThrow(()->new NumberFormatException());
 
-      itemsPerPage = request
-        .queryParam("itemsPerPage")
+      usersPerPage = request
+        .queryParam("usersPerPage")
         .map( s -> Integer.min(Integer.parseInt(s), 100))
         .orElseThrow(()->new NumberFormatException());
 
@@ -122,7 +122,7 @@ public class BotHandler {
 
     Mono<BotSubscribersDto> result = userService
       .findSubscribersForBot(
-        botId, page, itemsPerPage, sortUsernameAlphabetical, minUserAge, maxUserAge
+        botId, page, usersPerPage, sortUsernameAlphabetical, minUserAge, maxUserAge
       );
 
     return ServerResponse
@@ -135,17 +135,19 @@ public class BotHandler {
    * 
    * This method is needed for the frontend to show 
    * the total number of pages with bot subscribers,
-   * given the filter.
+   * given the filter. And returns fisrtpage. 
    * 
    * @param minUserAge, default 0
    * @param maxUserAge, default 200
    * @param usersPerPage, required
    * @param botId; required
+   * @param sortUsernameAlphabetical default false
    * @return Mono<BotSubscribersPaginationDto>;
    */
   public Mono<ServerResponse> botSubscribersPagination(ServerRequest request){
 
     int minUserAge, maxUserAge, botId, usersPerPage;
+    boolean sortUsernameAlphabetical;
 
     try{
 
@@ -173,12 +175,19 @@ public class BotHandler {
           HttpStatus.BAD_REQUEST, "usersPerPage argument is required")
         );
 
+      sortUsernameAlphabetical = request
+        .queryParam("sortUsernameAlphabetical")
+        .map(s -> Boolean.valueOf(s))
+        .orElse(false);
+
     }catch(Exception e){
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Request params not valid!");
     }
 
     Mono<BotSubscribersPaginationDto> result = userService
-      .botSubscribersPagination( botId, minUserAge, maxUserAge, usersPerPage);
+      .botSubscribersPagination( 
+        botId, minUserAge, maxUserAge, usersPerPage, sortUsernameAlphabetical
+      );
 
     return ServerResponse
       .ok()

@@ -1,7 +1,7 @@
-import React, { FC } from 'react'
-import style from '../style.scss'
 import { images, ImageType } from '@/components/GlobalImageComponent'
 import { Loader } from '@/components/LoaderA/Loader'
+import React, { FC } from 'react'
+import style from '../style.scss'
 
 export type BotPanelPropType = {
   id: number

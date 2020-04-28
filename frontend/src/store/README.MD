@@ -1,0 +1,1 @@
+When you add a reducer or saga, do not forget to update rootReducer OR rootSaga in root folder.

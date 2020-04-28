@@ -9,7 +9,8 @@ import lombok.NoArgsConstructor;
 @Data
 public class BotSubscribersPaginationDto {
 
-  Integer botId;
-  Integer pageCount;
+  private Integer botId;
+  private Integer pageCount;
+  private BotSubscribersDto firstPage;
 
 }

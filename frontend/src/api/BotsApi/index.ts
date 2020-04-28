@@ -1,1 +1,2 @@
-export * from './BotsApi'
+export * from './botsApi'
+export * from './botSubscribersApi'

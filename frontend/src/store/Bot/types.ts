@@ -11,7 +11,7 @@ export enum botActionTypeConstants {
 export type BotType = {
   name: string
   imageFilename: ImageType
-  id: number
+  id: number | null
   category: string
 }
 

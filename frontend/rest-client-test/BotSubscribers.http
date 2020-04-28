@@ -1,9 +1,6 @@
 
-GET http://127.0.0.1:8080/api/botsApi/findSubscribers?botId=1&page=0&itemsPerPage=4 HTTP/1.1
+GET http://127.0.0.1:8080/api/botsApi/findSubscribers?botId=1&page=0&itemsPerPage=10&minUserAge=30&maxUserAge=32&sortUsernameAlphabetical=true HTTP/1.1
 content-type: application/json
 
 
-
-GET http://127.0.0.1:8080/api/botsApi/findSubscribers?botId=1&page=0&itemsPerPage=4&sortUsernameAlphabetical=true&minUserAge=40&maxUserAge=42 HTTP/1.1
-content-type: application/json
 

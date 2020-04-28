@@ -53,7 +53,7 @@ const FilterOrBotPanel: FC<FilterOrBotPanelPropType> = ({
 }) => {
   const [panelType, setPanelType] = useState<FilterPanelType>('botBenu')
   const propsForBotPanel: BotPanelPropType = {
-    id: botId,
+    id: botId as number,
     isLoading,
     imageFilename: botAvatarFilename,
     name: botName,

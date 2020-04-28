@@ -13,9 +13,7 @@ import lombok.NoArgsConstructor;
 public class BotSubscribersDto {
 
   private Integer botId;
-  private Boolean haveNext;
   private Integer currentPage;
-
   private List<UserDtoMin> subscribers;
 
 }

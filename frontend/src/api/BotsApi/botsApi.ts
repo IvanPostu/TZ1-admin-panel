@@ -6,7 +6,6 @@ import { url } from '@/api/url'
  * {
  *    name: string
  *    current-page: number
- *    bots: Map<number, {id, name, avatarFilename}>
  * }
  */
 export async function fetchBots(name = '', currentPage = 0, botsPerPage = 8) {
