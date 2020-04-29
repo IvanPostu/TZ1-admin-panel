@@ -4,7 +4,9 @@ import java.util.Date;
 
 import com.webapp.adminpanel.domain.dto.BotSubscribersDto;
 import com.webapp.adminpanel.domain.dto.BotSubscribersPaginationDto;
+import com.webapp.adminpanel.domain.dto.UserDto;
 import com.webapp.adminpanel.domain.dto.UserDtoMin;
+import com.webapp.adminpanel.persistence.BotRepository;
 import com.webapp.adminpanel.persistence.UserRepository;
 import com.webapp.adminpanel.util.DateUtils;
 
@@ -19,6 +21,9 @@ public class UserService {
 
   @Autowired
   private UserRepository userRepository;
+
+  @Autowired
+  private BotRepository botRepository;
 
   public Mono<BotSubscribersDto> findSubscribersForBot(
     Integer botId, 
@@ -78,6 +83,33 @@ public class UserService {
       });
 
     return result;
+  }
+
+  public Mono<UserDto> findById(Integer userId){
+    Mono<UserDto> userDto = userRepository
+      .findById(userId)
+      .flatMap( userEntity -> {
+        Mono<UserDto> monoUserDto = botRepository
+        .countOfSubscription(userId)
+        .map( count -> {
+          UserDto dto = new UserDto();
+          int userYears = (int)DateUtils.getDiffYears(new Date(), userEntity.getBirthDate());
+          String fullname = userEntity.getFirstname()+' '+userEntity.getLastname();
+
+          dto.setId(userId);
+          dto.setSubscriptionCount((int)count.longValue());
+          dto.setAge(userYears);
+          dto.setAvatarFilename(userEntity.getAvatarFilename());
+          dto.setEmail(userEntity.getEmail());
+          dto.setFullname(fullname);
+
+          return dto;
+        });
+
+        return monoUserDto;
+      });
+
+      return userDto;
   }
 
 }

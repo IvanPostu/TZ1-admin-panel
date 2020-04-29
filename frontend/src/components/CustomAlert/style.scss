@@ -1,0 +1,55 @@
+@import '@/styles/colors.scss';
+@import '@/styles/mediaQueriesMixins.scss';
+
+#alertBody {
+  width: 500px;
+  overflow: hidden;
+  background: rgba(238, 238, 238, 0.975);
+  box-shadow: 0 0 10px rgb(85, 85, 85);
+  border-radius: 8px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+  padding: 10px;
+  text-align: center;
+
+  @include mql(sm){
+    width: 90%;
+  }
+
+  img{
+    max-width: 200px;
+    max-height: 200px;
+  }
+  
+  .content {
+    color: black;
+    font-size: 28px;
+    display: block;
+    margin: 20px 0;
+  
+  }
+  
+  .close {
+    font-size: 18px;
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+    background: $blueA;
+    font-weight: bold;
+    display: inline-block;
+    border-radius: 4px;
+  }
+  
+  .close:hover {
+    background: $blueB;
+  }
+  
+  .close:active {
+    background: $blueC;
+  }
+
+}
+

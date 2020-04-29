@@ -10,6 +10,7 @@ import {
   fetchBotSubscriberPagination,
   fetchBotSubscriberSpecificPage,
 } from '@/api/BotsApi'
+import { UserInfoAlert } from '@/components/CustomAlert'
 
 export const App: React.FC = (): React.ReactElement => {
   // useEffect(() => {
@@ -21,7 +22,7 @@ export const App: React.FC = (): React.ReactElement => {
     <ReduxWrapper>
       <BrowserRouter>
         <Navbar />
-        {/* div wrapper for footer */}
+        <UserInfoAlert />
         <div style={{ minHeight: '100vh' }}>
           <Switch>
             {routes.map((item, index) => (
