@@ -8,8 +8,8 @@ import {
   requestError,
   setPagesCount,
   clearPages,
-  fetchPage,
 } from '@/store/BotSubscribers/actionCreators'
+import { clearBot } from '@/store/Bot/actionCreators'
 import {
   botSubscribersActionTypeConstants,
   FetchPageActionType,
@@ -39,15 +39,11 @@ function* selectBotSubscribersSagaWorker(action: UpdateBotActionType) {
       maxUserAge,
     })
     const botSubscribers = result.firstPage.subscribers
-    // console.log(botSubscribers)
 
     avatarSetter(botSubscribers)
     yield put(clearPages())
     yield put(setPagesCount(result.pageCount))
-    // yield put(fetchPage(0))
     yield put(addPage(1, botSubscribers))
-
-    // console.log(1)
   } catch (e) {
     const errorMessage = 'Ошибка...'
     yield put(requestError(errorMessage))
@@ -95,4 +91,15 @@ function* fetchPageSagaWorker(action: FetchPageActionType) {
  */
 export function* fetchPageSagaWatcher() {
   yield takeEvery(botSubscribersActionTypeConstants.FETCH_PAGE, fetchPageSagaWorker)
+}
+
+/**
+ * Handle change filter
+ */
+function* filterChangedSagaWorker() {
+  yield put(clearBot())
+}
+
+export function* filterChangedSagaWatcher() {
+  yield takeEvery(botSubscribersActionTypeConstants.CHANGE_FILTER, filterChangedSagaWorker)
 }

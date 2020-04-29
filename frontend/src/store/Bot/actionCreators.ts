@@ -22,3 +22,7 @@ export const requestError = (errorMessage: string): T.RequestErrorActionType => 
   type: T.botActionTypeConstants.REQUEST_ERROR,
   payload: errorMessage,
 })
+
+export const clearBot = (): T.ClearBotActionType => ({
+  type: T.botActionTypeConstants.CLEAR_BOT,
+})

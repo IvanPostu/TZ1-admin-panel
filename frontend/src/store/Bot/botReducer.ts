@@ -36,6 +36,17 @@ const botReducer: Reducer<BotStateType, BotRootActionType> = (
         ...state,
         errorMessage: action.payload,
       }
+    case T.CLEAR_BOT:
+      return {
+        ...state,
+        name: '-',
+        imageFilename: 'no-robot-image',
+        id: null,
+        isLoading: false,
+        errorMessage: '',
+        category: '',
+        subscribersCount: 0,
+      }
 
     case T.FETCH_BOT: //handled by saga
     default:

@@ -5,6 +5,7 @@ export enum botActionTypeConstants {
   LOADING_START = '@Bot/LOADING_START',
   LOADING_END = '@Bot/LOADING_END',
   UPDATE_BOT = '@Bot/UPDATE_BOT',
+  CLEAR_BOT = '@Bot/CLEAR_BOT',
   REQUEST_ERROR = '@Bot/REQUEST_ERROR',
 }
 
@@ -48,12 +49,17 @@ export interface RequestErrorActionType {
   payload: string
 }
 
+export interface ClearBotActionType {
+  type: typeof botActionTypeConstants.CLEAR_BOT
+}
+
 export type BotRootActionType =
   | FetchBotActionType
   | StartLoadingType
   | StopLoadingType
   | UpdateBotActionType
   | RequestErrorActionType
+  | ClearBotActionType
 
 /**
  * Action types END

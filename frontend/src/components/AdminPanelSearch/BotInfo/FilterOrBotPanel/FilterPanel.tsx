@@ -1,6 +1,8 @@
 import React, { FC, useRef } from 'react'
 import style from '../style.scss'
 import { SearchSubscribersFilterType } from '@/store/BotSubscribers/types'
+import { useSelector } from 'react-redux'
+import { GlobalStateType } from '@/store'
 
 type FilterPanelPropType = {
   changeFilter: (filter: SearchSubscribersFilterType) => void
@@ -10,17 +12,26 @@ const FilterPanel: FC<FilterPanelPropType> = ({ changeFilter }) => {
   const sortAlphabetical = useRef<HTMLInputElement>(null)
   const minAge = useRef<HTMLInputElement>(null)
   const maxAge = useRef<HTMLInputElement>(null)
+  const filterFromStore = useSelector<GlobalStateType>(
+    (state) => state.botSubscribersReducer.searchFilter,
+  ) as SearchSubscribersFilterType
 
   return (
     <div className={style.filterPanel}>
       <div>
         <label style={{ flexGrow: 4 }}>Сортировать по алфавиту</label>
-        <input ref={sortAlphabetical} style={{ flexGrow: 2 }} type="checkbox" />
+        <input
+          defaultChecked={filterFromStore.sortSubscriberNameAlphabetical}
+          ref={sortAlphabetical}
+          style={{ flexGrow: 2 }}
+          type="checkbox"
+        />
       </div>
       <div>
         <label style={{ flexGrow: 4 }}>Минимальный возраст</label>
         <input
           ref={minAge}
+          defaultValue={filterFromStore.subscriberMinAge}
           style={{ flexGrow: 2 }}
           className={style.ageInput}
           type="number"
@@ -31,6 +42,7 @@ const FilterPanel: FC<FilterPanelPropType> = ({ changeFilter }) => {
         <label style={{ flexGrow: 4 }}>Максимальный возраст</label>
         <input
           ref={maxAge}
+          defaultValue={filterFromStore.subscriberMaxAge}
           style={{ flexGrow: 2 }}
           className={style.ageInput}
           type="number"

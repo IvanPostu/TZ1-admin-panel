@@ -21,7 +21,7 @@ export const Pagination: FC<PaginationPropTypes> = ({
   let showJumpToLast = false
   let showJumpToFirst = false
 
-  // if (totalPages === 1) return <Fragment />
+  if (totalPages <= 0) return <Fragment />
   if (totalPages > 5) {
     showJumpToLast = currentPage !== totalPages
     showJumpToFirst = currentPage > size / 2

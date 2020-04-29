@@ -5,6 +5,7 @@ export enum botSubscribersActionTypeConstants {
   ADD_PAGE = '@BotSubscribers/ADD_PAGE',
   SET_TOTAL_PAGES = '@BotSubscribers/SET_TOTAL_PAGES',
   CLEAR_PAGES = '@BotSubscribers/CLEAR_PAGES',
+  SET_CURRENT_PAGE = '@BotSubscribers/SET_CURRENT_PAGE',
 }
 
 export type SearchSubscribersFilterType = {
@@ -26,6 +27,7 @@ export type BotSubscribersStateType = {
   pages: Map<number, Array<SubscriberType>>
   searchFilter: SearchSubscribersFilterType
   errorMessage: string
+  currentPage: number
 }
 
 type AddPagePayloadType = {
@@ -65,6 +67,11 @@ export interface ClearPagesActionType {
   type: typeof botSubscribersActionTypeConstants.CLEAR_PAGES
 }
 
+export interface SetCurrentPageActionType {
+  type: typeof botSubscribersActionTypeConstants.SET_CURRENT_PAGE
+  payload: number
+}
+
 export type BotSubscribersRootActionType =
   | FetchPageActionType
   | ChangeFilterActionType
@@ -72,6 +79,7 @@ export type BotSubscribersRootActionType =
   | RequestErrorActionType
   | SetTotalPagesActionType
   | ClearPagesActionType
+  | SetCurrentPageActionType
 
 /**
  * Action types END

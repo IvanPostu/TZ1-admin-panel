@@ -8,12 +8,13 @@ import { Reducer } from 'redux'
 
 const initialState: BotSubscribersStateType = {
   totalPages: 100,
+  currentPage: 1,
   pages: new Map<number, Array<SubscriberType>>(),
   usersPerPage: 10,
   searchFilter: {
-    sortSubscriberNameAlphabetical: true,
-    subscriberMinAge: 30,
-    subscriberMaxAge: 40,
+    sortSubscriberNameAlphabetical: false,
+    subscriberMinAge: 0,
+    subscriberMaxAge: 100,
   },
   errorMessage: '',
 }
@@ -27,6 +28,8 @@ const botSubscribersReducer: Reducer<BotSubscribersStateType, BotSubscribersRoot
       return {
         ...state,
         searchFilter: action.payload,
+        pages: new Map(),
+        currentPage: 1,
       }
     case T.ADD_PAGE:
       const newMap = new Map(state.pages)
@@ -49,6 +52,11 @@ const botSubscribersReducer: Reducer<BotSubscribersStateType, BotSubscribersRoot
       return {
         ...state,
         pages: new Map(),
+      }
+    case T.SET_CURRENT_PAGE:
+      return {
+        ...state,
+        currentPage: action.payload,
       }
     case T.FETCH_PAGE: //handled by redux-saga
     default:

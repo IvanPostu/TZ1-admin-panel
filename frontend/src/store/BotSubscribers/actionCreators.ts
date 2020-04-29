@@ -8,6 +8,7 @@ import {
   RequestErrorActionType,
   SetTotalPagesActionType,
   ClearPagesActionType,
+  SetCurrentPageActionType,
 } from './types'
 
 export const fetchPage = (page: number): FetchPageActionType => {
@@ -42,4 +43,9 @@ export const setPagesCount = (totalPages: number): SetTotalPagesActionType => ({
 
 export const clearPages = (): ClearPagesActionType => ({
   type: T.CLEAR_PAGES,
+})
+
+export const setCurrentPage = (currentPage: number): SetCurrentPageActionType => ({
+  type: T.SET_CURRENT_PAGE,
+  payload: currentPage,
 })

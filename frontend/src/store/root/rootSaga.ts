@@ -4,6 +4,7 @@ import { fetchBotSagaWatcher } from '@/store/Bot/botSaga'
 import {
   selectBotSubscribersSagaWatcher,
   fetchPageSagaWatcher,
+  filterChangedSagaWatcher,
 } from '@/store/BotSubscribers/botSubscribersSaga'
 
 export default function* () {
@@ -13,5 +14,6 @@ export default function* () {
     fetchBotSagaWatcher(),
     selectBotSubscribersSagaWatcher(),
     fetchPageSagaWatcher(),
+    filterChangedSagaWatcher(),
   ])
 }

@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from 'react'
 import style from './style.scss'
-import { BotUserListContainer } from './BotUserListContainer'
-
+import { BotUserListContainer } from './SubscriberList/BotUserListContainer'
 import { FilterOrBotPanelContainer } from './FilterOrBotPanel/FilterOrBotPanelContainer'
 
 export const BotSubscribers: FunctionComponent = () => {
