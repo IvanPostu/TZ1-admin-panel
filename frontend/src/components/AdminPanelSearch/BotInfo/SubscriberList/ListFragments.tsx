@@ -1,10 +1,13 @@
-import React, { Fragment, FC } from 'react'
+import React, { Fragment, FC, useCallback } from 'react'
+import { useDispatch } from 'react-redux'
+import { Dispatch } from 'redux'
 import style from '../style.scss'
 import { Loader } from '@/components/LoaderA/Loader'
 import { SubscriberType } from '@/store/BotSubscribers/types'
 import { NavLink } from 'react-router-dom'
 import { images, ImageType } from '@/components/GlobalImageComponent'
 import { Pagination } from '@/components/Pagination'
+import { fetchUser } from '@/store/User/actionCreators'
 
 type SubscriberListPropType = {
   subscriberList: Array<SubscriberType>
@@ -18,26 +21,33 @@ export const SubscriberList = ({
   currentPage,
   subscriberList,
   totalPages,
-}: SubscriberListPropType) => (
-  <Fragment>
-    <div className={style.userlistTitle}>Пользователи текущего бота</div>
-    <ul className={style.userList}>
-      {subscriberList.map((item, index) => (
-        <li key={index}>
-          <img src={images.get(item.avatarFilename as ImageType)} />
-          <NavLink className={style.userLink} to="/">
-            {`${item.fullname} - age: ${item.age}`}
-          </NavLink>
-        </li>
-      ))}
-    </ul>
-    <Pagination
-      clickToPageHandler={clickToPageHandler}
-      currentPage={currentPage}
-      totalPages={totalPages}
-    />
-  </Fragment>
-)
+}: SubscriberListPropType) => {
+  const dispatch: Dispatch = useDispatch()
+  const fetchUserHandler = useCallback((userId: number) => {
+    dispatch(fetchUser(userId))
+  }, [])
+
+  return (
+    <Fragment>
+      <div className={style.userlistTitle}>Пользователи текущего бота</div>
+      <ul className={style.userList}>
+        {subscriberList.map((item, index) => (
+          <li key={index}>
+            <img src={images.get(item.avatarFilename as ImageType)} />
+            <NavLink onClick={() => fetchUserHandler(item.id)} className={style.userLink} to="/">
+              {`${item.fullname} - age: ${item.age}`}
+            </NavLink>
+          </li>
+        ))}
+      </ul>
+      <Pagination
+        clickToPageHandler={clickToPageHandler}
+        currentPage={currentPage}
+        totalPages={totalPages}
+      />
+    </Fragment>
+  )
+}
 
 export const BotIsNotDefined: FC = () => (
   <div className={style.userlistTitle}>Укажите бота в поисковом запросе</div>

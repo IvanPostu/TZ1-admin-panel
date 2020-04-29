@@ -6,6 +6,7 @@ import {
   fetchPageSagaWatcher,
   filterChangedSagaWatcher,
 } from '@/store/BotSubscribers/botSubscribersSaga'
+import { fetchUserSagaWatcher } from '@/store/User/userSaga'
 
 export default function* () {
   yield all([
@@ -15,5 +16,6 @@ export default function* () {
     selectBotSubscribersSagaWatcher(),
     fetchPageSagaWatcher(),
     filterChangedSagaWatcher(),
+    fetchUserSagaWatcher(),
   ])
 }
