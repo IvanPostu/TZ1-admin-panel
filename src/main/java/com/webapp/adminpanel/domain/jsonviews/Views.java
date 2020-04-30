@@ -8,4 +8,5 @@ public abstract class Views {
 
   public interface BotSubscribersDtoViews extends IdName {}
 
+  public interface FindUsersDtoViews extends IdName {}
 }

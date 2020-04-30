@@ -48,7 +48,7 @@ const BotFindForm: FunctionComponent<BotFindFormPropType> = (props) => {
     <div className={style.box}>
       <IoIosCog className={style.panelIcon} />
       <h2>Поиск бота</h2>
-      <p>Введите имя либо ID бота.</p>
+      <p>Введите имя бота.</p>
 
       <OutsideClickWrapper
         handlerIsActive={resultIsShowed}

@@ -4,6 +4,7 @@ import java.util.Date;
 
 import com.webapp.adminpanel.domain.dto.BotSubscribersDto;
 import com.webapp.adminpanel.domain.dto.BotSubscribersPaginationDto;
+import com.webapp.adminpanel.domain.dto.FindUsersDto;
 import com.webapp.adminpanel.domain.dto.UserDto;
 import com.webapp.adminpanel.domain.dto.UserDtoMin;
 import com.webapp.adminpanel.persistence.BotRepository;
@@ -110,6 +111,42 @@ public class UserService {
       });
 
       return userDto;
+  }
+
+  public Mono<FindUsersDto> findUsersByNameSubString (
+    String name, 
+    int currentPage, 
+    int usersPerPage)
+  {
+    int offset = currentPage * usersPerPage;
+    int limit = usersPerPage;
+
+    Flux<UserDtoMin> users = userRepository
+      .findUsersByFirstnameOfLastnameSubString(name, offset, limit+1)
+      .map(user -> {
+        UserDtoMin userDto = new UserDto();
+        String fullName = user.getFirstname() + ' ' + user.getLastname();
+        userDto.setAvatarFilename(user.getAvatarFilename());
+        userDto.setFullname(fullName);
+        userDto.setId(user.getId());
+        return userDto;
+      });
+
+    Mono<FindUsersDto> result = users
+      .collectList()
+      .map( list -> {
+        int listSize = list.size();
+        boolean haveNextPage = false; 
+        if(listSize==limit+1){
+          list.remove(listSize-1);
+          haveNextPage = true;
+        }
+
+        FindUsersDto resultDto = new FindUsersDto(name, currentPage, haveNextPage, list);
+        return resultDto;
+      });
+
+    return result;
   }
 
 }

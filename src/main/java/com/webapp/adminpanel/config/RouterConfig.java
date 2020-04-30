@@ -43,7 +43,10 @@ public class RouterConfig {
   public RouterFunction<ServerResponse> usersApiRoute(UserHandler userHandler) {
     return RouterFunctions
       .route(RequestPredicates.GET("api/usersApi/find")
-        .and(RequestPredicates.accept(MediaType.APPLICATION_JSON)),userHandler::find);
+        .and(RequestPredicates.accept(MediaType.APPLICATION_JSON)),userHandler::find)
+
+      .andRoute(RequestPredicates.GET("api/usersApi/findByName")
+        .and(RequestPredicates.accept(MediaType.APPLICATION_JSON)),userHandler::findUsersByName);
   }
 
 }

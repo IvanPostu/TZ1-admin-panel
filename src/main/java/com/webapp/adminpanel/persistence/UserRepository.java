@@ -40,4 +40,15 @@ public interface UserRepository extends ReactiveCrudRepository<UserEntity, Integ
     int maxUserAge
   );
 
+  @Query(value = ""+
+  "SELECT * FROM app_user AS u "+
+  "WHERE LOWER(u.firstname) LIKE CONCAT('%', LOWER(:name), '%') "+
+  "OR LOWER(u.lastname) LIKE CONCAT('%', LOWER(:name), '%') "+
+  "OFFSET :offset LIMIT :limit ")
+  public Flux<UserEntity> findUsersByFirstnameOfLastnameSubString(
+    String name, 
+    int offset, 
+    int limit
+  );
+
 }
