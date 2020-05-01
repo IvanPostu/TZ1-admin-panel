@@ -1,0 +1,14 @@
+
+debug: false
+
+
+spring:
+  r2dbc: 
+    url: r2dbc:postgresql://localhost:5432/app_db
+    username: postgres
+    password: qwerty
+  flyway: 
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/app_db}
+    user: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:qwerty}
+
