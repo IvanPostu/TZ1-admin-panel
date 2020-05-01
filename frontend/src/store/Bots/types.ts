@@ -21,7 +21,6 @@ export type BotType = {
 type FetchBotsActionPayloadType = {
   name: string
   page: number
-  botsPerPage: number
 }
 
 type UpdateBotsActionPayloadType = {

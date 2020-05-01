@@ -11,19 +11,18 @@ import {
 } from '@/store/Bots/types'
 
 /**
- * This action creator is handled by saga
+ * Return action is handled by saga
  */
-export const fetchBots = (name: string, page = 0, botsPerPage = 0): FetchBotsActionType => ({
+export const fetchBots = (name: string, page = 0): FetchBotsActionType => ({
   type: botsActionTypeConstants.FETCH_BOTS,
   payload: {
     name,
     page,
-    botsPerPage,
   },
 })
 
 /**
- * This action creator is handled by saga
+ * Return action is handled by saga
  */
 export const fetchNextPageBots = (): FetchNextPageBotsActionType => ({
   type: botsActionTypeConstants.FETCH_NEXT_PAGE,

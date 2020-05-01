@@ -20,9 +20,9 @@ const BotPanel: FC<BotPanelPropType> = (props) => (
       </div>
     )}
     <div>
-      <p>Name: {props.name}</p>
+      <p>Имя: {props.name}</p>
       <p>ID: {props.id}</p>
-      <p>Category: {props.category}</p>
+      <p>Категория: {props.category}</p>
     </div>
   </div>
 )

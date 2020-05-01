@@ -7,6 +7,10 @@ import {
   filterChangedSagaWatcher,
 } from '@/store/BotSubscribers/botSubscribersSaga'
 import { fetchUserSagaWatcher } from '@/store/User/userSaga'
+import {
+  fetchUsersByNameSagaWatcher,
+  fetchUsersNextPageByNameSagaWatcher,
+} from '@/store/UsersSearch/usersSearchSaga'
 
 export default function* () {
   yield all([
@@ -17,5 +21,7 @@ export default function* () {
     fetchPageSagaWatcher(),
     filterChangedSagaWatcher(),
     fetchUserSagaWatcher(),
+    fetchUsersByNameSagaWatcher(),
+    fetchUsersNextPageByNameSagaWatcher(),
   ])
 }

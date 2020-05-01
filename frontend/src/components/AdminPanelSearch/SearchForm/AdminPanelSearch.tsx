@@ -2,7 +2,7 @@ import React, { Component, PropsWithChildren } from 'react'
 
 import style from './style.scss'
 import { BotFindFormContainer } from './BotFindForm/BotFindFormContainer'
-import { UserFindForm } from '@/components/AdminPanelSearch/SearchForm/UserFindForm'
+import { UserFindFormContainer } from '@/components/AdminPanelSearch/SearchForm/UserFindForm'
 
 export class AdminPanelSearch extends Component<PropsWithChildren<{}>> {
   render() {
@@ -13,7 +13,7 @@ export class AdminPanelSearch extends Component<PropsWithChildren<{}>> {
             <BotFindFormContainer />
           </div>
           <div className={style.rowItem} style={{ flexGrow: 3, zIndex: 1 }}>
-            <UserFindForm />
+            <UserFindFormContainer />
           </div>
         </div>
       </div>

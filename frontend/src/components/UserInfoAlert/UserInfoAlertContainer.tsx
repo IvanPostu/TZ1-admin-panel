@@ -37,15 +37,17 @@ const UserInfoAlert: FC<UserInfoAlertPropType> = ({ userState, showOrHideUserInf
   return (
     <div id={style.alertBody}>
       <img src={images.get(avatarFilename as ImageType)} />
-      <h4>{fullname}</h4>
       <p>
-        <b>Age:</b> {age}
+        <b>Имя:</b> {fullname}
       </p>
       <p>
-        <b>Email:</b> {email}
+        <b>Возраст:</b> {age}
       </p>
       <p>
-        <b>Subscriptions:</b> {subscriptionCount}
+        <b>Эл. Почта:</b> {email}
+      </p>
+      <p>
+        <b>Подписок:</b> {subscriptionCount}
       </p>
       <br />
       <button onClick={() => showOrHideUserInfo(false)} className={style.close}>

@@ -28,6 +28,9 @@ type BotFindFormPropType = PropsWithChildren<{}> &
   ReturnType<typeof mapDispatchToProps> &
   ReturnType<typeof mapStateToProps>
 
+/**
+ * TO DO: FIX ME PLEASE!!!
+ */
 const BotFindForm: FunctionComponent<BotFindFormPropType> = (props) => {
   const [resultIsShowed, setResultIsShowed] = useState(false)
   const refToSearchInput = React.useRef<HTMLInputElement>(null)

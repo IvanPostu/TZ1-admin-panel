@@ -1,1 +1,1 @@
-export { UserFindForm } from './UserFindForm'
+export { UserFindFormContainer } from './UserFindFormContainer'

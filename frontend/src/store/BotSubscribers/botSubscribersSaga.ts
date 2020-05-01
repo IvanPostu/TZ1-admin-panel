@@ -16,7 +16,7 @@ import {
 } from '@/store/BotSubscribers/types'
 import { call, put, takeEvery } from 'redux-saga/effects'
 import { store } from '@/store/root'
-import { avatarSetter } from './helper'
+import { avatarSetter } from '@/utils/avatarHelper'
 
 /**
  * Handler for action bot changes by user
@@ -40,7 +40,7 @@ function* selectBotSubscribersSagaWorker(action: UpdateBotActionType) {
     })
     const botSubscribers = result.firstPage.subscribers
 
-    avatarSetter(botSubscribers)
+    avatarSetter(botSubscribers, 'no-user-image')
     yield put(clearPages())
     yield put(setPagesCount(result.pageCount))
     yield put(addPage(1, botSubscribers))
@@ -78,7 +78,7 @@ function* fetchPageSagaWorker(action: FetchPageActionType) {
       minUserAge,
       maxUserAge,
     })
-    avatarSetter(result.subscribers)
+    avatarSetter(result.subscribers, 'no-user-image')
     yield put(addPage(result.currentPage, result.subscribers))
   } catch (e) {
     const errorMessage = 'Ошибка...'
