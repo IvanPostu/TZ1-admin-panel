@@ -35,7 +35,7 @@ export const SubscriberList = ({
           <li key={index}>
             <img src={images.get(item.avatarFilename as ImageType)} />
             <NavLink onClick={() => fetchUserHandler(item.id)} className={style.userLink} to="/">
-              {`${item.fullname} - age: ${item.age}`}
+              {item.fullname}
             </NavLink>
           </li>
         ))}

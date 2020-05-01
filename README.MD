@@ -5,7 +5,9 @@
 Откуда узнал о ТЗ?   [Github->Hexlet](https://github.com/Hexlet/ru-test-assignments)
 
 #### UI
-![img1](./images/screen01.png "")
+![img](./images/scr4.png "")
+![img](./images/scr3.png "")
+![img](./images/scr1.png "")
 
 
 #### Чек-лист решения
@@ -43,4 +45,5 @@
 * **Web flux:** Веб приложения в реактивном стиле.
 * **R2DBC:** Работа с базой данных в реактивном стиле.
 * **Postgres:** СУБД для текущего проекта.
+* **Flyway:** Инструмент для миграции баз данных.
 
