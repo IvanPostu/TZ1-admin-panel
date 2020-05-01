@@ -90,7 +90,7 @@ VALUES
 (DEFAULT, 'Eskobar', NULL, NULL);
 
 
-SELECT insert_bots(200);
+SELECT insert_bots(100);
 
 
 DROP FUNCTION IF EXISTS random_int_range( INTEGER,  INTEGER);

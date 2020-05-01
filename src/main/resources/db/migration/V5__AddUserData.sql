@@ -54,7 +54,7 @@ BEGIN
 END;
 $$ LANGUAGE PLPGSQL;  
 
-SELECT insert_users(500); 
+SELECT insert_users(300); 
 
 -- **************Int TO STR*************************
 -- SELECT CAST( random_int_range(12,33323) AS varchar(10));
