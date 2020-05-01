@@ -32,10 +32,9 @@ const FilterPanel: FC<FilterPanelPropType> = ({ changeFilter }) => {
         <input
           ref={minAge}
           defaultValue={filterFromStore.subscriberMinAge}
-          style={{ flexGrow: 2 }}
+          style={{ flexGrow: 2, maxWidth: '30px' }}
           className={style.ageInput}
-          type="number"
-          min={4}
+          type="text"
         />
       </div>
       <div>
@@ -43,10 +42,9 @@ const FilterPanel: FC<FilterPanelPropType> = ({ changeFilter }) => {
         <input
           ref={maxAge}
           defaultValue={filterFromStore.subscriberMaxAge}
-          style={{ flexGrow: 2 }}
+          style={{ flexGrow: 2, maxWidth: '30px' }}
           className={style.ageInput}
-          type="number"
-          max={200}
+          type="text"
         />
       </div>
       <div>
@@ -55,8 +53,8 @@ const FilterPanel: FC<FilterPanelPropType> = ({ changeFilter }) => {
             try {
               const filter: SearchSubscribersFilterType = {
                 sortSubscriberNameAlphabetical: sortAlphabetical.current?.checked as boolean,
-                subscriberMinAge: minAge.current?.valueAsNumber as number,
-                subscriberMaxAge: maxAge.current?.valueAsNumber as number,
+                subscriberMinAge: Number(minAge.current?.value),
+                subscriberMaxAge: Number(maxAge.current?.value),
               }
               if (filter.subscriberMinAge > filter.subscriberMaxAge) throw 1
 

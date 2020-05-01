@@ -4,7 +4,7 @@ debug: false
 
 spring:
   r2dbc: 
-    url: ${R2DBC_DB_URL:r2dbc:postgresql://localhost:5432/app_db}
+    url: r2dbc:postgresql://localhost:5432/app_db
     username: postgres
     password: qwerty
   flyway: 
