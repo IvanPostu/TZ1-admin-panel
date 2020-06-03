@@ -22,13 +22,16 @@ END;
 $$ LANGUAGE PLPGSQL;
 
 
-
 CREATE OR REPLACE FUNCTION insert_users(n INTEGER) RETURNS VOID AS $$
 DECLARE
   i INTEGER := 0;
   imagename varchar(100);
   image_index INTEGER;
+  usernames_table_last_index INTEGER;
+  firstname_id INTEGER;
+  lastname_id INTEGER;
 BEGIN
+  usernames_table_last_index := (SELECT max(id) FROM usernames);
   FOR i IN 1..n LOOP
     image_index := random_int_range(1,10);
     IF image_index < 8 
@@ -38,18 +41,22 @@ BEGIN
       imagename := NULL;
     END IF;
 
-    INSERT INTO "app_user" (id, birth_date, email, firstname, lastname, avatar_filename)
-    VALUES
-    (
-      DEFAULT, 
-      CAST(CONCAT(CAST( random_int_range(1970,2010) AS varchar(10)) , '-',
-        CAST( random_int_range(1,12) AS varchar(10)),'-',
-        CAST( random_int_range(1,27) AS varchar(10)))AS DATE ),
-      CONCAT(random_string(random_int_range(7,22)), '@mail.com'),
-      random_string(random_int_range(7,22)), 
-      random_string(random_int_range(7,22)), 
-      imagename
-    );
+    firstname_id := random_int_range(1,usernames_table_last_index);
+    lastname_id := random_int_range(1,usernames_table_last_index);
+
+    INSERT INTO "app_user" (birth_date, email, firstname, lastname, avatar_filename)
+      (SELECT 
+        CAST(CONCAT(CAST( random_int_range(1970,2010) AS varchar(10)) , '-',
+          CAST( random_int_range(1,12) AS varchar(10)),'-',
+          CAST( random_int_range(1,27) AS varchar(10)))AS DATE ),
+
+        CONCAT(random_string(random_int_range(7,22)), '@mail.com'),
+
+        (SELECT "username" FROM "usernames" WHERE id=firstname_id LIMIT 1) AS firstname,
+        (SELECT "username" FROM "usernames" WHERE id=lastname_id LIMIT 1) AS lastname,
+
+        imagename
+      );
   END LOOP;
 END;
 $$ LANGUAGE PLPGSQL;  
@@ -62,5 +69,5 @@ SELECT insert_users(300);
 
 DROP FUNCTION IF EXISTS insert_users(INTEGER);
 DROP FUNCTION IF EXISTS random_string(INTEGER);
-DROP FUNCTION IF EXISTS random_int_range( INTEGER,  INTEGER);
+DROP FUNCTION IF EXISTS random_int_range(INTEGER, INTEGER);
 

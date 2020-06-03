@@ -16,6 +16,14 @@
             "request": "launch",
             "mainClass": "com.webapp.adminpanel.DemoApplication",
             "projectName": "TZ-adsfad"
-        }
+        },
+        {
+          "type": "java",
+          "name": "Debug (Attach)",
+          "projectName": "admin-panel",
+          "request": "attach",
+          "hostName": "127.0.0.1",
+          "port": 5005
+      }
     ]
 }

@@ -43,6 +43,7 @@
   "editor.detectIndentation": false,
   "editor.insertSpaces": true,
   "search.showLineNumbers": true,
+  "telemetry.enableTelemetry": false,
   "workbench.colorCustomizations": {
     "editorWarning.foreground": "#ff9100",
     "editorError.foreground": "#ff0000",
