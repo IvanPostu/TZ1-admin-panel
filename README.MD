@@ -7,11 +7,13 @@
 Откуда узнал о ТЗ?   [Github->Hexlet](https://github.com/Hexlet/ru-test-assignments)
 
 #### UI
-![img](./images/scr4.png "")
+![img](./images/scr1.png "")
+##
+![img](./images/scr2.png "")
 ##
 ![img](./images/scr3.png "")
 ##
-![img](./images/scr1.png "")
+![img](./images/scr4.png "")
 
 
 #### Чек-лист решения
@@ -40,7 +42,7 @@
 * **Redux:** Библиотека для работы с потоком данных + частично с бизнес логикой.
 * **Redux Saga:** Библиотека для работы с асинхронным потоком данных + частично с бизнес логикой.
 * **Sass + Postcss:** Удобный препроцессор для стилей + кроссбраузерность + оптимизация. 
-* **Normalize.css:** Cовременная, готовая к HTML5.
+* **Normalize.css:**
 * **Linter + Prettier:** Статический анализ кода.
 
 #### Backend
