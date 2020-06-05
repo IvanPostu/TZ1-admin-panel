@@ -1,6 +1,0 @@
-
-GET http://127.0.0.1:8080/api/botsApi/usersPagination?botId=33&usersPerPage=10&sortUsernameAlphabetical=true&minUserAge=63&maxUserAge=64 HTTP/1.1
-content-type: application/json
-
-
-
